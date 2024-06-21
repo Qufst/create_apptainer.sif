@@ -14,6 +14,7 @@ From: mambaorg/micromamba:alpine
 
     wget -qO- "https://yihui.org/tinytex/install-bin-unix.sh" > install-tinytex.sh
     chmod +x install-tinytex.sh
+    sudo chown -R Qufst:Qufst $HOME_DIR
     sh install-tinytex.sh --admin --dir $HOME_DIR/.TinyTeX
     export PATH=$HOME/.TinyTeX/bin/x86_64-linux:$PATH
         
