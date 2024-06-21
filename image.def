@@ -8,7 +8,11 @@ From: mambaorg/micromamba:alpine
 
 %post
     wget -qO- https://quarto.org/download/latest/quarto-linux-amd64.tar.gz | tar -xvz -C $HOME
-    ls $HOME/quarto
+    ls $HOME/ quarto-1.4.555/
+    
+    $HOME/quarto-1.4.555/ install tinytex
+
+    $HOME/quarto-1.4.555/ add --no-prompt computorg/computo-quarto-extension
 
 %runscript
-    $HOME/quarto publish index.qmd
+    $HOME/quarto-1.4.555/ publish index.qmd
