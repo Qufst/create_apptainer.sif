@@ -9,12 +9,13 @@ From: mambaorg/micromamba:alpine
 %post
     wget -qO- https://quarto.org/download/latest/quarto-linux-amd64.tar.gz | tar -xvz -C $HOME
     export PATH=$HOME/quarto/bin:$PATH
+    ls $HOME
 
-    mkdir -p ~/.local/bin
-    ~/.TinyTeX/bin/x86_64-linux/tlmgr option sys_bin ~/.local/bin
-    ~/.TinyTeX/bin/x86_64-linux/tlmgr path add
-    ~/.TinyTeX/bin/x86_64-linux/tlmgr update --self
-    ~/.TinyTeX/bin/x86_64-linux/tlmgr install libertinus-fonts
+    mkdir -p $HOME/.local/bin
+    $HOME/.TinyTeX/bin/x86_64-linux/tlmgr option sys_bin $HOME/.local/bin
+    $HOME/.TinyTeX/bin/x86_64-linux/tlmgr path add
+    $HOME/.TinyTeX/bin/x86_64-linux/tlmgr update --self
+    $HOME/.TinyTeX/bin/x86_64-linux/tlmgr install libertinus-fonts
 
     quarto add --no-prompt computorg/computo-quarto-extension
 
