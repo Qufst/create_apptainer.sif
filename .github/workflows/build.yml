@@ -17,7 +17,11 @@ jobs:
 
       - name: Install apptainer
         run: |
-          sudo apt-get install -y apptainer
+          ./mconfig
+          cd $(/bin/pwd)/builddir
+          make
+          sudo make install
+          apptainer --version
 
       - name: Create sif with apptainer
         run: |
