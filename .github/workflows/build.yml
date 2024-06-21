@@ -22,7 +22,8 @@ jobs:
           ls /opt/apptainer/bin/apptainer
           cat /opt/apptainer/bin/apptainer
           ls -la /opt/apptainer/bin
-          echo 'export PATH="/opt/apptainer/bin/apptainer:$PATH"' >> $HOME/.bashrc
+          which apptainer
+          echo 'export PATH="/opt/apptainer/bin:$PATH"' >> $HOME/.bashrc
           source $HOME/.bashrc
           apptainer --version
 
