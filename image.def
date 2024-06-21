@@ -7,8 +7,8 @@ From: mambaorg/micromamba:alpine
     micromamba activate myenv
 
 %post
-    wget -qO- https://quarto.org/download/latest/quarto-linux-amd64.tar.gz | tar -xvj /usr/local
-    export PATH=/usr/local/quarto/bin:$PATH
+    wget -qO- https://quarto.org/download/latest/quarto-linux-amd64.tar.gz | tar -xvj $HOME
+    export PATH=$HOME/quarto/bin:$PATH
 
     mkdir -p ~/.local/bin
     ~/.TinyTeX/bin/x86_64-linux/tlmgr option sys_bin ~/.local/bin
