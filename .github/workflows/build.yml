@@ -17,11 +17,7 @@ jobs:
 
       - name: Install apptainer
         run: |
-          ./mconfig
-          cd $(/bin/pwd)/builddir
-          make
-          sudo make install
-          apptainer --version
+          bash install-apptainer-ubuntu.sh 1.17.2 linux amd64 3.8.5
 
       - name: Create sif with apptainer
         run: |
