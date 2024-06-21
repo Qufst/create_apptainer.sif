@@ -11,7 +11,7 @@ From: mambaorg/micromamba:alpine
     export PATH=$HOME/quarto/bin:$PATH
     ls $HOME
 
-    wget -qO- "https://yihui.org/tinytex/install-bin-unix.sh" | sh
+    wget -qO- "https://yihui.org/tinytex/install-bin-unix.sh"
     export PATH=$HOME/bin:$PATH
     $HOME/.TinyTeX/bin/x86_64-linux/tlmgr path add
     $HOME/.TinyTeX/bin/x86_64-linux/tlmgr update --self
