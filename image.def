@@ -7,7 +7,7 @@ From: mambaorg/micromamba:alpine
     micromamba activate myenv
 
 %post
-    wget -qO- https://quarto.org/download/latest/quarto-linux-amd64.tar.gz | tar -xvj $HOME
+    wget -qO- https://quarto.org/download/latest/quarto-linux-amd64.tar.gz | tar -xvz $HOME
     export PATH=$HOME/quarto/bin:$PATH
 
     mkdir -p ~/.local/bin
