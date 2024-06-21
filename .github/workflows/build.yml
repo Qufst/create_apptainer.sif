@@ -17,7 +17,30 @@ jobs:
 
       - name: Install apptainer
         run: |
-          bash install-apptainer-ubuntu.sh 1.17.2 linux amd64 3.8.5
+          sudo apt-get update && sudo apt-get install -y \
+            build-essential \
+            libssl-dev \
+            uuid-dev \
+            libgpgme11-dev \
+            squashfs-tools \
+            libseccomp-dev \
+            wget \
+            pkg-config \
+            git \
+            cryptsetup \
+            curl
+          wget https://dl.google.com/go/go$1.$2-$3.tar.gz && \
+          sudo tar -C /usr/local -xzvf go$1.$2-$3.tar.gz && \
+          rm go$1.$2-$3.tar.gz && \
+          export PATH=/usr/local/go/bin:$PATH && \
+          echo 'export PATH=/usr/local/go/bin:$PATH' >> ~/.bashrc
+          wget https://github.com/hpcng/singularity/releases/download/v$4/singularity-$4.tar.gz && \
+          tar -xzf singularity-$4.tar.gz && \
+          cd singularity-$4 && \
+          ./mconfig && \
+          make -C builddir && \
+          sudo make -C builddir install && \
+          sudo ln -s /usr/local/bin/singularity /usr/local/bin/apptainer
 
       - name: Create sif with apptainer
         run: |
