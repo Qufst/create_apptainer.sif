@@ -9,11 +9,10 @@ From: mambaorg/micromamba:alpine
 %post
     wget -qO- https://quarto.org/download/latest/quarto-linux-amd64.tar.gz | tar -xvz -C $HOME
     export PATH=$HOME/quarto/bin:$PATH
-    ls $HOME
     
-    quarto install tinytex
+    $HOME/quarto install tinytex
 
-    quarto add --no-prompt computorg/computo-quarto-extension
+    $HOME/quarto add --no-prompt computorg/computo-quarto-extension
 
 %runscript
-    quarto publish index.qmd
+    $HOME/quarto publish index.qmd
