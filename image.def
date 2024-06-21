@@ -10,7 +10,10 @@ From: mambaorg/micromamba:alpine
     apk add --no-cache perl wget
     wget -qO- https://quarto.org/download/latest/quarto-linux-amd64.tar.gz | tar -xvz -C $HOME
 
-    wget -qO- "https://yihui.org/tinytex/install-bin-unix.sh" | sh
+    wget -qO- "https://yihui.org/tinytex/install-bin-unix.sh" > install-tinytex.sh
+    chmod +x install-tinytex.sh
+    sh install-tinytex.sh
+    export PATH=$HOME/.TinyTeX/bin/x86_64-linux:$PATH
         
     export PATH=$HOME/.TinyTeX/bin/x86_64-linux:$PATH
     $HOME/.TinyTeX/bin/x86_64-linux/tlmgr path add
