@@ -10,7 +10,5 @@ From: mambaorg/micromamba:alpine
     wget -qO- https://quarto.org/download/latest/quarto-linux-amd64.tar.gz | tar -xvz -C $HOME
     ls $HOME/quarto
 
-    $HOME/quarto add --no-prompt computorg/computo-quarto-extension
-
 %runscript
     $HOME/quarto publish index.qmd
