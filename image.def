@@ -13,7 +13,6 @@ From: mambaorg/micromamba:alpine
     wget -qO- https://quarto.org/download/latest/quarto-linux-amd64.tar.gz | tar -xvz -C $HOME
 
     wget -qO- "https://yihui.org/tinytex/install-bin-unix.sh" > install-tinytex.sh
-    find / -type f -name "install.sh"
     find / -type f -name "tinytex.profile"
 
 
