@@ -7,7 +7,7 @@ From: mambaorg/micromamba:alpine
     micromamba activate myenv
 
 %post
-    apt install -y perl wget tar git
+    apk install -y perl wget tar git
     git config --global user.email "quentin.festor@etu.umontpellier.com"
     git config --global user.name "quarto-github-actions"
     wget -qO- https://quarto.org/download/latest/quarto-linux-amd64.tar.gz | tar -xvz -C $HOME
