@@ -1,0 +1,21 @@
+name: singularity-deploy
+
+on:
+  push:
+    branches: ["main"]
+  repository_dispatch:
+    types: [custom-event] 
+  workflow_dispatch:
+
+jobs:
+  release:
+    name: Create Release
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Create sif with apptainer
+        run: |
+          apptainer build image.sif image.def docker://mambaorg/micromamba:alpine
+
