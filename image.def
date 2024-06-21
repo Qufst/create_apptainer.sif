@@ -8,11 +8,16 @@ From: mambaorg/micromamba:alpine
 
 %post
     wget -qO- https://quarto.org/download/latest/quarto-linux-amd64.tar.gz | tar -xvz -C $HOME
-    ls $HOME/quarto-1.4.555/
-    
-    $HOME/quarto-1.4.555/ install tinytex
 
-    $HOME/quarto-1.4.555/ add --no-prompt computorg/computo-quarto-extension
+    wget -qO- "https://yihui.org/tinytex/install-bin-unix.sh" | sh
+        
+    export PATH=$HOME/.TinyTeX/bin/x86_64-linux:$PATH
+    $HOME/.TinyTeX/bin/x86_64-linux/tlmgr path add
+    $HOME/.TinyTeX/bin/x86_64-linux/tlmgr update --self
+    $HOME/.TinyTeX/bin/x86_64-linux/tlmgr install libertinus-fonts
+
+
+    quarto add --no-prompt computorg/computo-quarto-extension
 
 %runscript
-    $HOME/quarto-1.4.555/ publish index.qmd
+    quarto publish index.qmd
