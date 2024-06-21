@@ -7,9 +7,9 @@ From: mambaorg/micromamba:alpine
     micromamba activate myenv
 
 %post
+    apk add --no-cache perl wget tar git
     git config --global user.email "quentin.festor@etu.umontpellier.com"
     git config --global user.name "quarto-github-actions"
-    apk add --no-cache perl wget
     wget -qO- https://quarto.org/download/latest/quarto-linux-amd64.tar.gz | tar -xvz -C $HOME
 
     wget -qO- "https://yihui.org/tinytex/install-bin-unix.sh" > install-tinytex.sh
