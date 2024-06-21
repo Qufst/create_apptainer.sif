@@ -11,8 +11,8 @@ From: mambaorg/micromamba:alpine
     export PATH=$HOME/quarto/bin:$PATH
     ls $HOME
 
-    mkdir -p $HOME/.local/bin
-    $HOME/.TinyTeX/bin/x86_64-linux/tlmgr option sys_bin $HOME/.local/bin
+    wget -qO- "https://yihui.org/tinytex/install-bin-unix.sh" | sh
+    export PATH=$HOME/bin:$PATH
     $HOME/.TinyTeX/bin/x86_64-linux/tlmgr path add
     $HOME/.TinyTeX/bin/x86_64-linux/tlmgr update --self
     $HOME/.TinyTeX/bin/x86_64-linux/tlmgr install libertinus-fonts
