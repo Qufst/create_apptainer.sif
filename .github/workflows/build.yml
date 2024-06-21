@@ -23,5 +23,5 @@ jobs:
 
       - name: Create sif with apptainer
         run: |
-          install-dir/bin/apptainer build image.sif image.def docker://mambaorg/micromamba:alpine
+          install-dir/bin/apptainer build image.sif image.def
 
