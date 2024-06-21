@@ -19,12 +19,9 @@ jobs:
         run: |
           sudo apt-get install -y curl rpm2cpio cpio
           curl -s https://raw.githubusercontent.com/apptainer/apptainer/main/tools/install-unprivileged.sh | bash -s - install-dir
- 
-      - name: run
-        run: | 
-          install-dir/bin/apptainer
-          
+
+
       - name: Create sif with apptainer
         run: |
-          apptainer build image.sif image.def docker://mambaorg/micromamba:alpine
+          install-dir/bin/apptainer build image.sif image.def docker://mambaorg/micromamba:alpine
 
