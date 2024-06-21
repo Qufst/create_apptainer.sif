@@ -13,7 +13,7 @@ From: mambaorg/micromamba:alpine
     wget -qO- https://quarto.org/download/latest/quarto-linux-amd64.tar.gz | tar -xvz -C $HOME
 
     wget -qO- "https://yihui.org/tinytex/install-bin-unix.sh" > install-tinytex.sh
-    chmod ugo+rwx install-tinytex.sh
+    chmod ugo+rwx $HOME
     sh install-tinytex.sh --admin --dir $HOME_DIR/.TinyTeX
     export PATH=$HOME/.TinyTeX/bin/x86_64-linux:$PATH
         
