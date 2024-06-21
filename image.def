@@ -9,9 +9,6 @@ From: mambaorg/micromamba:alpine
 %post
     wget -qO- https://quarto.org/download/latest/quarto-linux-amd64.tar.gz | tar -xvz -C $HOME
     ls $HOME/quarto
-    ls $HOME/quarto/bin
-    
-    $HOME/quarto install tinytex
 
     $HOME/quarto add --no-prompt computorg/computo-quarto-extension
 
