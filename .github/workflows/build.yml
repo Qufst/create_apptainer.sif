@@ -19,10 +19,8 @@ jobs:
         run: |
           sudo apt-get install -y curl rpm2cpio cpio
           curl -s https://raw.githubusercontent.com/apptainer/apptainer/main/tools/install-unprivileged.sh | bash -s - /opt/apptainer
-          ls /opt/apptainer
-          echo 'export PATH="/opt/apptainer/bin:$PATH"' >> ~/.bashrc
-          source ~/.bashrc
           ls /opt/apptainer/bin
+          source /opt/apptainer/bin
           apptainer --version
 
       - name: Create sif with apptainer
