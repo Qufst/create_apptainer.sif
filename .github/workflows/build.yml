@@ -17,8 +17,10 @@ jobs:
 
       - name: Install apptainer
         run: |
-          sudo yum install -y epel-release
-          sudo yum install -y apptainer
+          sudo apt-get install -y \
+            curl
+          curl -s https://raw.githubusercontent.com/apptainer/apptainer/main/tools/install-unprivileged.sh | \
+            bash -s - install-dir
       - name: Create sif with apptainer
         run: |
           apptainer build image.sif image.def docker://mambaorg/micromamba:alpine
