@@ -12,7 +12,6 @@ From: mambaorg/micromamba:alpine
     git config --global user.name "quarto-github-actions"
     wget -qO- https://quarto.org/download/latest/quarto-linux-amd64.tar.gz | tar -xvz -C $HOME
 
-    wget -qO- "https://yihui.org/tinytex/install-bin-unix.sh" | sh
     tinytex:::install_prebuilt()
 
 
