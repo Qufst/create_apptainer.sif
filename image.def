@@ -16,7 +16,7 @@ From: mambaorg/micromamba:alpine
     echo "quarto.tar installed"
     tar -xzvf /quarto-1.5.47.tar.gz
 
-    find / -name "quarto-1.5.47" 2>/dev/null
+    find / -name "quarto" 2>/dev/null
     
     echo "quarto untared"
     ls -l quarto-1.5.47
