@@ -22,8 +22,8 @@ From: mambaorg/micromamba:alpine
     
     echo "quarto untared"
 
-
-    bash /quarto/configure.sh
+    cd quarto
+    bash /configure.sh
 
 
     echo "quarto.sh"
