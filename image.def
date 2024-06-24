@@ -117,10 +117,8 @@ From: mambaorg/micromamba:alpine
         echo "tinytex install finished"
         quarto add --no-prompt computorg/computo-quarto-extension
         echo "quarto-extension"
+        quarto publish index.qmd
     fi
-
-%publish
-quarto publish index.qmd
     
 
 
