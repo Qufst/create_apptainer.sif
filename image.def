@@ -12,8 +12,7 @@ From: mambaorg/micromamba:alpine
     git config --global user.name "quarto-github-actions"
     wget -qO- https://quarto.org/download/latest/quarto-linux-amd64.tar.gz | tar -xvz -C $HOME
 
-    wget -qO- "https://yihui.org/tinytex/install-bin-unix.sh" | sh -s - --admin --no-path
-    export PATH=$HOME/.TinyTeX/bin/x86_64-linux:$PATH
+    $HOME/quarto/bin/quarto install tinytex --update-path
         
     $HOME/.TinyTeX/bin/x86_64-linux/tlmgr path add
     $HOME/.TinyTeX/bin/x86_64-linux/tlmgr update --self
