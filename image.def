@@ -12,7 +12,13 @@ From: mambaorg/micromamba:alpine
     git config --global user.name "quarto-github-actions"
     wget -qO- https://quarto.org/download/latest/quarto-linux-amd64.tar.gz | tar -xvz -C $HOME
     
+    ls $HOME
+    echo "ls finished"
+    find $HOME -name "*quarto*" 2>/dev/null
     echo "quarto installation finished"
+    find $(micromamba info --base)/envs/myenv -name "*quarto*" 2>/dev/null
+    echo "find conda quarto"
+    find / -name "*quarto*" 2>/dev/null
 
     quarto install tinytex --update-path
 
