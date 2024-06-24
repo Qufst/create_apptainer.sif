@@ -11,10 +11,10 @@ From: mambaorg/micromamba:alpine
     git config --global user.email "quentin.festor@etu.umontpellier.com"
     git config --global user.name "quarto-github-actions"
     # Télécharger et installer Quarto via un script d'installation direct
-    wget https://github.com/quarto-dev/quarto-cli/releases/download/v1.4.555/quarto-1.4.555-linux-amd64.tar.gz
+    wget https://github.com/quarto-dev/quarto-cli/releases/download/v1.5.47/quarto-1.5.47.tar.gz
 
     echo "quarto.tar installed"
-    tar -xzvf /tmp/build-temp-1884370650/rootfs/quarto-1.4.555-linux-amd64.tar.gz
+    tar -xzvf /quarto-1.5.47.tar.gz
     
 
     echo "quarto untared"
