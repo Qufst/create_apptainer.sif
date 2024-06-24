@@ -14,7 +14,8 @@ From: mambaorg/micromamba:alpine
     wget https://github.com/quarto-dev/quarto-cli/releases/download/v1.5.47/quarto-1.5.47.tar.gz
 
     echo "quarto.tar installed"
-    tar -xzvf quarto-1.5.47.tar.gz -C $HOME/quarto
+    mkdir quarto
+    tar -xzvf quarto-1.5.47.tar.gz -C /quarto
 
 
     find $HOME/quarto -name ".sh" 
