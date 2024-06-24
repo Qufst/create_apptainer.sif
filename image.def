@@ -25,7 +25,7 @@ From: mambaorg/micromamba:alpine
     ls -a 
 
     ls -a /quarto
-
+    cat /quarto/dev-docs
     /quarto/configure.sh
 
 
