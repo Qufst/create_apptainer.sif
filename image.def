@@ -11,16 +11,16 @@ From: mambaorg/micromamba:alpine
     git config --global user.email "quentin.festor@etu.umontpellier.com"
     git config --global user.name "quarto-github-actions"
     # Télécharger et installer Quarto via un script d'installation direct
-    wget https://github.com/quarto-dev/quarto-cli/releases/download/v1.5.47/quarto-1.5.47.tar.gz
+    wget https://github.com/quarto-dev/quarto-cli/releases/download/v1.5.46/quarto-1.5.46.tar.gz
 
     echo "quarto.tar installed"
-    tar -xzvf quarto-1.5.47.tar.gz
+    tar -xzvf quarto-1.5.46.tar.gz
 
     sh ./configure.sh
 
     echo "quarto untared"
 
-    rm quarto-1.5.47.tar.gz                          # Clean up downloaded tarball
+    rm quarto-1.5.46.tar.gz                          # Clean up downloaded tarball
     
     quarto install tinytex --update-path
 
