@@ -23,7 +23,8 @@ From: mambaorg/micromamba:alpine
     echo "quarto untared"
 
     cd quarto
-    bash /configure.sh
+    ls -a 
+    bash quarto/configure.sh
 
 
     echo "quarto.sh"
