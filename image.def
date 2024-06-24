@@ -18,12 +18,9 @@ From: mambaorg/micromamba:alpine
     tar -xzvf quarto-1.5.47.tar.gz -C /quarto
 
 
-    find /quarto -name ".sh" 
+    find /quarto -name "*.sh" 
     
     echo "quarto untared"
-
-    cat /configure.sh
-    chmod +x /configure.sh
 
 
     bash /configure.sh
