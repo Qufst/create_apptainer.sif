@@ -18,8 +18,6 @@ From: mambaorg/micromamba:alpine
     tar -xzf quarto-1.4.555-linux-amd64.tar.gz
 
     echo "quarto untared"
-
-    cd quarto-1.4.555-linux-amd64
     ls -l
 
 
