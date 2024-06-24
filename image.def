@@ -19,10 +19,11 @@ From: mambaorg/micromamba:alpine
 
 
     find / -name "*quarto" 
-    
+    ls -a /src/resources/extensions/quarto
+
     echo "quarto untared"
 
-
+    ls -a /quarto
     rm quarto-1.5.47.tar.gz                          # Clean up downloaded tarball
     
     quarto install tinytex --update-path
