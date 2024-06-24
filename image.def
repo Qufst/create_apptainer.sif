@@ -17,8 +17,6 @@ From: mambaorg/micromamba:alpine
     mkdir quarto
     tar -xzvf quarto-1.5.47.tar.gz
 
-
-    find / -name "*quarto" 
     ls -a /src/resources/extensions/quarto
 
     echo "quarto untared"
