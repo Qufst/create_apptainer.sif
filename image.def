@@ -12,13 +12,31 @@ From: mambaorg/micromamba:alpine
     git config --global user.name "quarto-github-actions"
     wget -qO- https://quarto.org/download/latest/quarto-linux-amd64.tar.gz | tar -xvz -C $HOME
     
+
     find / -name "*quarto*" 2>/dev/null
 
-    quarto install tinytex --update-path
+    # Créer un répertoire temporaire avec les permissions nécessaires pour TinyTeX
+    mkdir -p /tmp/tinytex && cd /tmp/tinytex
+    
+    # Télécharger et installer TinyTeX
+    wget -qO- "https://yihui.org/tinytex/install-bin-unix.sh" | sh -s - --admin --no-path
+    
+    # Déplacer TinyTeX dans le répertoire utilisateur et nettoyer
+    mv ~/.TinyTeX $HOME/.TinyTeX
+    cd $HOME
+    rm -rf /tmp/tinytex
+    
+    # Ajouter TinyTeX au PATH
+    export PATH=$HOME/.TinyTeX/bin/x86_64-linux:$PATH
+        
+    # Mettre à jour TinyTeX et installer des packages
+    $HOME/.TinyTeX/bin/x86_64-linux/tlmgr path add
+    $HOME/.TinyTeX/bin/x86_64-linux/tlmgr update --self
+    $HOME/.TinyTeX/bin/x86_64-linux/tlmgr install libertinus-fonts
 
     echo "tinytex install finished"
         
-    $HOME/quarto/bin/quarto add --no-prompt computorg/computo-quarto-extension
+    $HOME/quarto-1.4.555/bin/quarto add --no-prompt computorg/computo-quarto-extension
 
 %runscript
-    $HOME/quarto/bin/quarto publish index.qmd
+    $HOME/quarto-1.4.555/bin/quarto publish index.qmd
