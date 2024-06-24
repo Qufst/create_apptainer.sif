@@ -20,11 +20,11 @@ From: mambaorg/micromamba:alpine
     
     echo "quarto untared"
 
-    cat /tmp/build-temp-689828707/rootfs/configure.sh
-    chmod +x /tmp/build-temp-689828707/rootfs/configure.sh
+    cat /configure.sh
+    chmod +x /configure.sh
 
 
-    bash /tmp/build-temp-689828707/rootfs/configure.sh
+    bash /configure.sh
 
 
     echo "quarto.sh"
