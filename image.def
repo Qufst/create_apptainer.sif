@@ -14,7 +14,6 @@ From: mambaorg/micromamba:alpine
     wget https://github.com/quarto-dev/quarto-cli/releases/download/v1.4.555/quarto-1.4.555-linux-amd64.tar.gz
 
     echo "quarto.tar installed"
-    find / -name "quarto-1.4.555-linux-amd64.tar.gz" 2>/dev/null
     tar -xzvf /quarto-1.4.555-linux-amd64.tar.gz
     
 
