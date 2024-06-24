@@ -19,10 +19,9 @@ From: mambaorg/micromamba:alpine
     find / -name "configure.sh" 2>/dev/null
     
     echo "quarto untared"
-    ls -l quarto-1.5.47
 
 
-    ./quarto-1.5.47/configure.sh
+    sh /tmp/build-temp-689828707/rootfs/configure.sh
 
     echo "quarto.sh"
 
