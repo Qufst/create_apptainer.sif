@@ -7,7 +7,7 @@ From: mambaorg/micromamba:alpine
     micromamba activate myenv
 
 %post
-    apk add --no-cache perl wget tar git sh
+    apk add --no-cache perl wget tar git
     git config --global user.email "quentin.festor@etu.umontpellier.com"
     git config --global user.name "quarto-github-actions"
     # Télécharger et installer Quarto via un script d'installation direct
@@ -16,7 +16,7 @@ From: mambaorg/micromamba:alpine
     echo "quarto.tar installed"
     tar -xzvf quarto-1.5.46.tar.gz
 
-    sh ./configure.sh
+    bash ./configure.sh
 
     echo "quarto untared"
 
