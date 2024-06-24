@@ -15,7 +15,8 @@ From: mambaorg/micromamba:alpine
 
     echo "quarto.tar installed"
     find / -name "quarto-1.4.555-linux-amd64.tar.gz" 2>/dev/null
-    tar -xzf quarto-1.4.555-linux-amd64.tar.gz
+    tar -xzf /quarto-1.4.555-linux-amd64.tar.gz
+    
 
     echo "quarto untared"
     ls -l
