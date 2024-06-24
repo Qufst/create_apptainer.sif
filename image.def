@@ -18,10 +18,10 @@ From: mambaorg/micromamba:alpine
     
 
     echo "quarto untared"
-    ls -l
+    ls -l quarto-1.5.47
 
 
-    ./quarto-1.4.555-linux-amd64/install.sh
+    ./quarto-1.5.47/configure.sh
 
     echo "quarto.sh"
 
