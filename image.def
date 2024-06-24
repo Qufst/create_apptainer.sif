@@ -19,6 +19,10 @@ From: mambaorg/micromamba:alpine
 
     echo "quarto untared"
 
+    cd quarto-1.4.555-linux-amd64
+    ls -l
+
+
     ./quarto-1.4.555-linux-amd64/install.sh
 
     echo "quarto.sh"
