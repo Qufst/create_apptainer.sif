@@ -11,7 +11,7 @@ From: mambaorg/micromamba:alpine
     git config --global user.email "quentin.festor@etu.umontpellier.com"
     git config --global user.name "quarto-github-actions"
     # Télécharger et installer Quarto via un script d'installation direct
-    wget -O quarto-linux-amd64.sh https://github.com/quarto-dev/quarto-cli/releases/download/v1.2.269/quarto-1.2.269-linux-amd64.sh
+    wget -O quarto-linux-amd64.sh https://github.com/quarto-dev/quarto-cli/blob/main/configure.sh
     sh quarto-linux-amd64.sh -y
 
     # Vérifier l'installation de Quarto
