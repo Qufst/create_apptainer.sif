@@ -12,7 +12,7 @@ From: mambaorg/micromamba:alpine
     git config --global user.name "quarto-github-actions"
     # Télécharger et installer Quarto via un script d'installation direct
     wget -O configure.sh https://raw.githubusercontent.com/quarto-dev/quarto-cli/main/configure.sh
-    sh congigure.sh -y
+    sh congigure.sh 
 
     # Vérifier l'installation de Quarto
     quarto check install
