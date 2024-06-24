@@ -7,12 +7,12 @@ From: mambaorg/micromamba:alpine
     micromamba activate myenv
 
 %post
-    apk add --no-cache perl wget curl tar git
+    apk add --no-cache perl wget tar git
     git config --global user.email "quentin.festor@etu.umontpellier.com"
     git config --global user.name "quarto-github-actions"
     wget -qO- https://quarto.org/download/latest/quarto-linux-amd64.tar.gz | tar -xvz -C $HOME
 
-    curl -sL "https://yihui.org/tinytex/install-bin-unix.sh" | sh
+    wget -qO- "https://yihui.org/tinytex/install-bin-unix.sh" | sh -s - --admin --no-path
     export PATH=$HOME/.TinyTeX/bin/x86_64-linux:$PATH
         
     $HOME/.TinyTeX/bin/x86_64-linux/tlmgr path add
@@ -20,7 +20,7 @@ From: mambaorg/micromamba:alpine
     $HOME/.TinyTeX/bin/x86_64-linux/tlmgr install libertinus-fonts
 
 
-    quarto add --no-prompt computorg/computo-quarto-extension
+    $HOME/quarto/bin/quarto add --no-prompt computorg/computo-quarto-extension
 
 %runscript
-    quarto publish index.qmd
+    $HOME/quarto/bin/quarto publish index.qmd
