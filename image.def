@@ -10,15 +10,20 @@ From: mambaorg/micromamba:alpine
     apk add --no-cache perl wget tar git
     git config --global user.email "quentin.festor@etu.umontpellier.com"
     git config --global user.name "quarto-github-actions"
-    wget -qO- https://quarto.org/download/latest/quarto-linux-amd64.tar.gz | tar -xvz -C $HOME
+    # Télécharger et installer Quarto via un script d'installation direct
+    wget -O quarto-linux-amd64.sh https://github.com/quarto-dev/quarto-cli/releases/download/v1.2.269/quarto-1.2.269-linux-amd64.sh
+    sh quarto-linux-amd64.sh -y
+
+    # Vérifier l'installation de Quarto
+    quarto check install
     
     
 
-    $HOME/quarto-1.4.555/bin/quarto install tinytex --update-path
+    quarto install tinytex --update-path
 
     echo "tinytex install finished"
         
-    $HOME/quarto-1.4.555/bin/quarto add --no-prompt computorg/computo-quarto-extension
+    quarto add --no-prompt computorg/computo-quarto-extension
 
 %runscript
-    $HOME/quarto-1.4.555/bin/quarto publish index.qmd
+    quarto publish index.qmd
