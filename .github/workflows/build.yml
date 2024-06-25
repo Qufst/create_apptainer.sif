@@ -25,5 +25,12 @@ jobs:
         run: |
           install-dir/bin/apptainer build --fakeroot image.sif image.def
 
+      - name: upload .sif in an artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: apptainer-image
+          path: image.sif
+        
+
         
 
