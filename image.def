@@ -11,6 +11,7 @@ From: mambaorg/micromamba:alpine
     ls -a
     micromamba create -y -n myenv -f environment.yml
 %environment
+    eval "$(micromamba shell hook --shell )"
     micromamba activate myenv
 
 %help
