@@ -9,7 +9,7 @@ From: mambaorg/micromamba:alpine
 %files 
     environment.yml /environment.yml
 %post
-    micromamba install -y -f ./environment.yml
+    micromamba install -y -f /environment.yml
 %environment
     micromamba activate myenv
 
