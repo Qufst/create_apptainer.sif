@@ -1,8 +1,14 @@
 Bootstrap: docker
 From: mambaorg/micromamba:alpine
 
+%labels
+    AUTHOR Quentin Festor
+    VERSION 1.0
+    DESCRIPTION "test de création de sif pour computo"
+
 %post
-    ls -a .run
+    find . -name environment.yml
+
     cp environment.yml .
     micromamba install -y -f environment.yml
     echo "source micromamba activate myenv" >> $SINGULARITY_ENVIRONMENT
@@ -10,3 +16,6 @@ From: mambaorg/micromamba:alpine
     . $SINGULARITY_ENVIRONMENT
 
     apk update texlive
+
+%help
+    Utilisation : apptainer run image.sif --option
