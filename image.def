@@ -1,12 +1,13 @@
 Bootstrap: docker
 From: mambaorg/micromamba:alpine
-Copy: environment.yml environment.yml
 
 %labels
     AUTHOR Quentin Festor
     VERSION 1.0
     DESCRIPTION "test de création de sif pour computo"
 
+%files 
+    environment.yml /environment.yml
 %post
     micromamba install -y -f ./environment.yml
 %environment
