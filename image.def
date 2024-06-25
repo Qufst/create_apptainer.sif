@@ -7,10 +7,7 @@ From: mambaorg/micromamba:alpine
     DESCRIPTION "test de création de sif pour computo"
 
 %post
-    find . -name environment.yml
-
-    cp environment.yml .
-    micromamba install -y -f environment.yml
+    micromamba install -y -f ./environment.yml
     echo "source micromamba activate myenv" >> $SINGULARITY_ENVIRONMENT
 %environment
     . $SINGULARITY_ENVIRONMENT
