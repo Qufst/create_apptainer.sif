@@ -23,5 +23,23 @@ jobs:
 
       - name: Create sif with apptainer
         run: |
-          install-dir/bin/apptainer build image.sif image.def
+          install-dir/bin/apptainer build --fakeroot image.sif image.def
+
+      - name: activate the environment from the sif
+        run: |
+          apptainer exec image.sif 
+        
+      - name: Set up Quarto
+        uses: quarto-dev/quarto-actions/setup@v2
+        with:
+          tinytex: true
+
+      - name: Install Computo extension for Quarto
+        run: |
+          quarto add --no-prompt computorg/computo-quarto-extension
+
+      - name: Render
+        run: |
+          quarto publish index.qmd
+        
 
