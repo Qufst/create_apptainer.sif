@@ -7,7 +7,7 @@ From: mambaorg/micromamba:alpine
     DESCRIPTION "test de création de sif pour computo"
 
 %files 
-    environment.yml /environment.yml
+    https://github.com/Qufst/create_apptainer.sif/environment.yml /environment.yml
 %post
     micromamba install -y -f /environment.yml
 %environment
