@@ -9,7 +9,7 @@ From: mambaorg/micromamba:alpine
 %post
     wget -O environment.yml https://raw.githubusercontent.com/Qufst/create_apptainer.sif/main/environment.yml
     ls -a
-    micromamba create -n environment.yml
+    micromamba create -n myenv environment.yml
 %environment
     micromamba activate myenv
 
