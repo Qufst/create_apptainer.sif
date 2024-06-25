@@ -1,6 +1,6 @@
 Bootstrap: docker
 From: mambaorg/micromamba:alpine
-Copy: --chown=$MAMBA_USER:$MAMBA_USER environment.yml environment.yml
+Copy: environment.yml environment.yml
 
 %labels
     AUTHOR Quentin Festor
