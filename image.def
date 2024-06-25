@@ -1,5 +1,6 @@
 Bootstrap: docker
 From: mambaorg/micromamba:alpine
+Copy: --chown=$MAMBA_USER:$MAMBA_USER environment.yml environment.yml
 
 %labels
     AUTHOR Quentin Festor
@@ -8,9 +9,8 @@ From: mambaorg/micromamba:alpine
 
 %post
     micromamba install -y -f ./environment.yml
-    echo "source micromamba activate myenv" >> $SINGULARITY_ENVIRONMENT
 %environment
-    . $SINGULARITY_ENVIRONMENT
+    micromamba activate myenv
 
     apk update texlive
 
