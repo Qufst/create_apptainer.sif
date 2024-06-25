@@ -6,5 +6,4 @@ From: mambaorg/micromamba:alpine
     micromamba install -y -f environment.yml
     micromamba activate myenv
 
-%post
     apk update texlive
