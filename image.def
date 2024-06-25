@@ -13,7 +13,6 @@ From: mambaorg/micromamba:alpine
     environment.yml
 %environment
     micromamba activate myenv
-    apk update texlive
 
 %help
     Utilisation : apptainer run image.sif --option
