@@ -3,7 +3,8 @@ From: mambaorg/micromamba:alpine
 
 %post
     micromamba install -y -f environment.yml
+    echo "source micromamba activate myenv" >> $SINGULARITY_ENVIRONMENT
 %environment
-    micromamba activate myenv
+    . $SINGULARITY_ENVIRONMENT
 
     apk update texlive
