@@ -2,6 +2,7 @@ Bootstrap: docker
 From: mambaorg/micromamba:alpine
 
 %post
+    cp environment.yml
     micromamba install -y -f environment.yml
     echo "source micromamba activate myenv" >> $SINGULARITY_ENVIRONMENT
 %environment
