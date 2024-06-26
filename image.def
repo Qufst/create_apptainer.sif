@@ -12,19 +12,19 @@ From: alpine:latest
     wget https://github.com/mamba-org/micromamba-releases/releases/latest/download/micromamba-linux-64.tar.bz2 -O micromamba-linux-64.tar.bz2
 
     # Étape 2: Décompresser le fichier téléchargé
-    tar -tvjf micromamba-linux-64.tar.bz2
+    mkdir mamba
+    tar -tvjf micromamba-linux-64.tar.bz2 mamba
     ls -a
     echo "ls"
 
-    ls -a micromamba-linux-64
 
 
     # Étape 4: Créer un environnement à partir du fichier environment.yml
-    micromamba-linux-64/bin/micromamba create -y -n myenv -f environment.yml
+    mamba/bin/micromamba create -y -n myenv -f environment.yml
 
 
 %environment
-    eval "$(micromamba-linux-64/bin/micromamba shell hook --shell )"
-    micromamba-linux-64/bin/micromamba activate myenv
+    eval "$(mamba/bin/micromamba shell hook --shell )"
+    mamba/bin/micromamba activate myenv
 %help
     Utilisation : apptainer run image.sif --option
