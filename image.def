@@ -7,13 +7,13 @@ From: alpine:latest
     DESCRIPTION "test de création de sif pour computo"
 
 %post
-    apk add curl tar 
+    apk add wget tar bzip2 bash
     wget -O environment.yml https://raw.githubusercontent.com/Qufst/create_apptainer.sif/main/environment.yml
 
 
     # Download micromamba
-    wget -qO- https://api.anaconda.org/release/conda-forge/micromamba/latest | tar -xvj --strip-components=1 bin/micromamba
-
+    wget -O micromamba.tar.bz2 https://github.com/mamba-org/micromamba/releases/latest/download/micromamba-linux-64.tar.bz2
+    tar -xvjf micromamba.tar.bz2 -C /usr/local/bin --strip-components=1 bin/micromamba
 
     ./micromamba shell init -s bash -p ~/micromamba
     mkdir -p ~/micromamba/pkgs/
