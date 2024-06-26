@@ -8,15 +8,25 @@ From: alpine:latest
 
 %post
     apk add wget tar bzip2 bash curl
-    wget -O environment.yml https://raw.githubusercontent.com/Qufst/create_apptainer.sif/main/environment.yml
+    # Étape 1: Télécharger le fichier micromamba-linux-64.tar.bz2
+    wget https://github.com/mamba-org/micromamba-releases/releases/latest/download/micromamba-linux-64.tar.bz2 -O micromamba-linux-64.tar.bz2
 
-    wget -O install-micromamba.sh https://micro.mamba.pm/install.sh
-    ls -a
-    cat install-micromamba.sh
-    bash install-micromamba.sh
+    # Étape 2: Décompresser le fichier téléchargé
+    tar -xvjf micromamba-linux-64.tar.bz2
 
+    # Étape 3: Déplacer l'exécutable de micromamba à un endroit accessible
+    mkdir -p ~/.local/bin
+    mv micromamba ~/.local/bin/micromamba
 
+    # Ajouter micromamba au PATH
+    export PATH=$PATH:~/.local/bin
+
+    # Vérifier l'installation
+    micromamba --version
+
+    # Étape 4: Créer un environnement à partir du fichier environment.yml
     micromamba create -y -n myenv -f environment.yml
+
 
 %environment
     eval "$(micromamba shell hook --shell )"
