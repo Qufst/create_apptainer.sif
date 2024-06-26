@@ -13,23 +13,18 @@ From: alpine:latest
 
     # Étape 2: Décompresser le fichier téléchargé
     tar -xvjf micromamba-linux-64.tar.bz2
+    ls -a
+    echo "ls"
 
-    # Étape 3: Déplacer l'exécutable de micromamba à un endroit accessible
-    mkdir -p ~/.local/bin
-    mv micromamba ~/.local/bin/micromamba
+    ls -a micromamba-linux-64
 
-    # Ajouter micromamba au PATH
-    export PATH=$PATH:~/.local/bin
-
-    # Vérifier l'installation
-    micromamba --version
 
     # Étape 4: Créer un environnement à partir du fichier environment.yml
-    micromamba create -y -n myenv -f environment.yml
+    micromamba-linux-64/bin/micromamba create -y -n myenv -f environment.yml
 
 
 %environment
-    eval "$(micromamba shell hook --shell )"
-    micromamba activate myenv
+    eval "$(micromamba-linux-64/bin/micromamba shell hook --shell )"
+    micromamba-linux-64/bin/micromamba activate myenv
 %help
     Utilisation : apptainer run image.sif --option
