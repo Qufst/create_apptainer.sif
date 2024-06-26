@@ -56,16 +56,20 @@ ls -la ${HOME}/.local/bin/
 # Initializing shell
 case "$INIT_YES" in
   y|Y|yes)
-    if ! command -v ${HOME}/.local/bin/micromamba &> /dev/null
-    then
-        echo "command not found"
-    else
-        echo "found"
-    fi
-    ${HOME}/.local/bin/micromamba shell init --shell "$shell" --root-prefix "$PREFIX_LOCATION"
+    #case $(${HOME}/.local/bin/micromamba --version) in
+    #  1.*|0.*)
+    #    shell_arg=-s
+    #    prefix_arg=-p
+    #    ;;
+    #  *)
+    #    shell_arg=--shell
+    #    prefix_arg=--root-prefix
+    #    ;;
+    #esac
+    ${HOME}/.local/bin/micromamba shell init #$shell_arg "$shell" $prefix_arg "$PREFIX_LOCATION"
 
     echo "Please restart your shell to activate micromamba or run the following:\n"
-    echo "source ~/.bashrc"
+    echo "source ~/.bashrc (or ~/.zshrc, ~/.xonshrc, ~/.config/fish/config.fish, ...)"
     ;;
   *)
     echo "You can initialize your shell later by running:"
