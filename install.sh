@@ -50,9 +50,9 @@ mkdir -p ${HOME}/.local/bin/micromamba
 
 wget -qO ${HOME}/.local/bin/micromamba ${RELEASE_URL}
 
-ls -a ${HOME}/.local/bin/micromamba
-
 chmod +x ${HOME}/.local/bin/micromamba
+
+
 # Initializing shell
 case "$INIT_YES" in
   y|Y|yes)
