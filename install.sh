@@ -2,7 +2,7 @@
 
 set -eu
 
-# Detect the shell from which the script was called
+# détéction du shell parent, je peux le modifier vu que le shell est constant ici
 parent=$(ps -o comm $PPID |tail -1)
 parent=${parent#-}  # remove the leading dash that login shells have
 case "$parent" in
@@ -16,7 +16,7 @@ case "$parent" in
     ;;
 esac
 
-# Parsing arguments
+# cette partie est un peu inutile dans un workflows mais je la garde quand même
 if [ -t 0 ] ; then
   printf "Micromamba binary folder? [~/.local/bin] "
   read BIN_FOLDER
@@ -26,12 +26,12 @@ if [ -t 0 ] ; then
   read CONDA_FORGE_YES
 fi
 
-# Fallbacks
+# réponse automatiques oui
 BIN_FOLDER="${BIN_FOLDER:-${HOME}/.local/bin}"
 INIT_YES="${INIT_YES:-yes}"
 CONDA_FORGE_YES="${CONDA_FORGE_YES:-yes}"
 
-# Prefix location is relevant only if we want to call `micromamba shell init`
+# définit le lieu de `micromamba shell init`
 case "$INIT_YES" in
   y|Y|yes)
     if [ -t 0 ]; then
@@ -42,10 +42,13 @@ case "$INIT_YES" in
 esac
 PREFIX_LOCATION="${PREFIX_LOCATION:-${HOME}/micromamba}"
 
+# Téléchargement de l'url
 RELEASE_URL=https://github.com/mamba-org/micromamba-releases/releases/latest/download/micromamba-linux-64
 
 # Downloading artifact
+ls -a
 mkdir -p "${BIN_FOLDER}"
+ls -a ${HOME}/.local/bin
 if hash curl >/dev/null 2>&1; then
   curl "${RELEASE_URL}" -o "${BIN_FOLDER}/micromamba" -fsSL --compressed ${CURL_OPTS:-}
 elif hash wget >/dev/null 2>&1; then
