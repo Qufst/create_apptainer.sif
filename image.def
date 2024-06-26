@@ -11,29 +11,23 @@ From: alpine:latest
 
 
     # Download micromamba
-    wget -O /usr/local/bin/micromamba https://micro.mamba.pm/api/micromamba/linux-64/latest
+    if [ "$RUNNER_OS" == "Linux" ]; then
+      wget -qO- https://micromamba.snakepit.net/api/micromamba/linux-64/latest | tar -xvj bin/micromamba --strip-components=1
+    else
+      wget -qO- https://micromamba.snakepit.net/api/micromamba/osx-64/latest | tar -xvj bin/micromamba
+      mv bin/micromamba ./micromamba
+    fi
 
-    ls -a
-    ls -a /usr/local/bin/micromamba
+    ./micromamba shell init -s bash -p ~/micromamba
+    mkdir -p ~/micromamba/pkgs/
+    export MAMBA_ROOT_PREFIX=~/micromamba
+    export MAMBA_EXE=$(pwd)/micromamba
+    . $MAMBA_ROOT_PREFIX/etc/profile.d/mamba.sh
+    ./micromamba create -y -n myenv -f environment.yml
 
-    # Rendre Micromamba exécutable
-    chmod +x /usr/local/bin/micromamba
 
-    # Créer un répertoire pour l'environnement conda
-    mkdir -p /opt/mamba
-
-    # Initialiser Micromamba
-    /usr/local/bin/micromamba shell init -s bash -p /opt/mamba
-
-    # Ajouter Micromamba au PATH
-    export PATH=/opt/mamba/bin:$PATH
-
-    # Créer l'environnement conda à partir du fichier environment.yml
-    micromamba create -y -f /environment.yml -p /opt/mamba
-    
 %environment
     eval "$(micromamba shell hook --shell )"
     micromamba activate myenv
-micromamba create -y -n myenv -f environment.yml
 %help
     Utilisation : apptainer run image.sif --option
