@@ -1,5 +1,5 @@
 Bootstrap: docker
-From: mambaorg/micromamba:alpine
+From: alpine:latest
 
 %labels
     AUTHOR Quentin Festor
@@ -7,6 +7,8 @@ From: mambaorg/micromamba:alpine
     DESCRIPTION "test de création de sif pour computo"
 
 %post
+    "${SHELL}" <(curl -L micro.mamba.pm/install.sh)
+    micromamba self-update
     wget -O environment.yml https://raw.githubusercontent.com/Qufst/create_apptainer.sif/main/environment.yml
     ls -a
     micromamba create -y -n myenv -f environment.yml
