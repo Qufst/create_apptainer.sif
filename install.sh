@@ -47,14 +47,9 @@ RELEASE_URL=https://github.com/mamba-org/micromamba-releases/releases/latest/dow
 
 # Downloading artifact
 mkdir -p ${HOME}/.local/bin
-if hash curl >/dev/null 2>&1; then
-  curl "${RELEASE_URL}" -o ${HOME}/.local/bin/micromamba -fsSL --compressed ${CURL_OPTS:-}
-elif hash wget >/dev/null 2>&1; then
-  wget ${WGET_OPTS:-} -qO ${HOME}/.local/bin/micromamba "${RELEASE_URL}"
-else
-  echo "Neither curl nor wget was found" >&2
-  exit 1
-fi
+
+wget -qO ${HOME}/.local/bin/micromamba ${RELEASE_URL}
+
 chmod +x ${HOME}/.local/bin/micromamba
 
 
