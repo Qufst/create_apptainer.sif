@@ -54,8 +54,8 @@ chmod a+x ${HOME}/.local/bin/micromamba
 ls -la ${HOME}/.local/bin/
 
 # Initializing shell
-case "$INIT_YES" in
-  y|Y|yes)
+#case "$INIT_YES" in
+#  y|Y|yes)
     #case $(${HOME}/.local/bin/micromamba --version) in
     #  1.*|0.*)
     #    shell_arg=-s
@@ -66,17 +66,17 @@ case "$INIT_YES" in
     #    prefix_arg=--root-prefix
     #    ;;
     #esac
-    ${HOME}/.local/bin/micromamba shell init #$shell_arg "$shell" $prefix_arg "$PREFIX_LOCATION"
-
-    echo "Please restart your shell to activate micromamba or run the following:\n"
-    echo "source ~/.bashrc (or ~/.zshrc, ~/.xonshrc, ~/.config/fish/config.fish, ...)"
-    ;;
-  *)
-    echo "You can initialize your shell later by running:"
-    echo "micromamba shell init"
-    ;;
-esac
-
+#    ${HOME}/.local/bin/micromamba shell init $shell_arg "$shell" $prefix_arg "$PREFIX_LOCATION"
+#
+#    echo "Please restart your shell to activate micromamba or run the following:\n"
+#    echo "source ~/.bashrc (or ~/.zshrc, ~/.xonshrc, ~/.config/fish/config.fish, ...)"
+#    ;;
+#  *)
+#    echo "You can initialize your shell later by running:"
+#    echo "micromamba shell init"
+#    ;;
+#esac
+source ~/.bashrc
 
 # Initializing conda-forge
 case "$CONDA_FORGE_YES" in

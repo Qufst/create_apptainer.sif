@@ -9,14 +9,14 @@ From: alpine:latest
 %post
     apk add wget tar bzip2 bash curl
     wget -O environment.yml https://raw.githubusercontent.com/Qufst/create_apptainer.sif/main/environment.yml
-    ls -la ${SHELL}
-    "${SHELL}" <(curl -L https://micro.mamba.pm/install.sh)
-    micromamba shell init
+    wget -O install.sh https://raw.githubusercontent.com/Qufst/create_apptainer.sif/main/install.sh
 
-    micromamba create -y -n myenv -f environment.yml
+    bash install.sh
+
+    ${HOME}/.local/bin/micromamba create -y -n myenv -f environment.yml
 
 %environment
-    eval "$(mamba/bin/micromamba shell hook --shell )"
-    mamba/bin/micromamba activate myenv
+    eval "$(${HOME}/.local/bin/micromamba shell hook --shell )"
+   ${HOME}/.local/bin/micromamba activate myenv
 %help
     Utilisation : apptainer run image.sif --option
