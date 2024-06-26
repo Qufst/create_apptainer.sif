@@ -11,7 +11,6 @@ From: alpine:latest
     wget -O environment.yml https://raw.githubusercontent.com/Qufst/create_apptainer.sif/main/environment.yml
     wget -O install.sh https://raw.githubusercontent.com/Qufst/create_apptainer.sif/main/install.sh
 
-    ls -a
     bash install.sh
 
     micromamba create -y -n myenv -f environment.yml
