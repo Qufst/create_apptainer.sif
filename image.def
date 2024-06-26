@@ -13,7 +13,7 @@ From: alpine:latest
 
     # Étape 2: Décompresser le fichier téléchargé
     mkdir mamba
-    tar -tvjf micromamba-linux-64.tar.bz2 mamba
+    tar -jxvf  micromamba-linux-64.tar.bz2 -C mamba
     ls -a
     echo "ls"
 
