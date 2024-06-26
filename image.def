@@ -12,7 +12,7 @@ From: alpine:latest
 
 
     # Download micromamba
-    wget -O micromamba.tar.bz2 https://github.com/mamba-org/micromamba/releases/latest/download/micromamba-linux-64.tar.bz2
+    wget -O micromamba.tar.bz2 https://api.anaconda.org/release/conda-forge/micromamba/latest
     tar -xvjf micromamba.tar.bz2 -C /usr/local/bin --strip-components=1 bin/micromamba
 
     ./micromamba shell init -s bash -p ~/micromamba
