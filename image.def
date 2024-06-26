@@ -19,7 +19,7 @@ From: alpine:latest
     source mamba/bin/micromamba
 
     # Étape 4: Créer un environnement à partir du fichier environment.yml
-    mamba/bin/micromamba create -y -n myenv -f environment.yml
+    ~/mamba/bin/micromamba create -y -n myenv -f environment.yml
 
 
 %environment
