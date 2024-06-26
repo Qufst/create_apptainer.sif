@@ -10,7 +10,8 @@ From: alpine:latest
     apk add wget tar bzip2 bash
     wget -O environment.yml https://raw.githubusercontent.com/Qufst/create_apptainer.sif/main/environment.yml
 
-    wget -qO- https://github.com/mamba-org/micromamba-releases/releases/latest/download/micromamba-linux-64
+    wget -qO- micromamba.tar.bz2 https://github.com/mamba-org/micromamba-releases/releases/latest/download/micromamba-linux-64.tar.bz2
+    tar -xvjf micromamba.tar.bz2 -C /usr/local/bin --strip-components=1
     chmod +x micromamba-linux-64
     ./micromamba-linux-64
     micromamba --version
