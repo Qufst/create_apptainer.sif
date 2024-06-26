@@ -12,7 +12,7 @@ From: alpine:latest
 
 
     # Download micromamba
-    wget -qO- https://micromamba.snakepit.net/api/micromamba/linux-64/latest | tar -xvj --strip-components=1 bin/micromamba
+    wget -qO- https://api.anaconda.org/release/conda-forge/micromamba/latest | tar -xvj --strip-components=1 bin/micromamba
 
 
     ./micromamba shell init -s bash -p ~/micromamba
