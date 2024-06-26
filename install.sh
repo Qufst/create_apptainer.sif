@@ -46,11 +46,11 @@ PREFIX_LOCATION="${PREFIX_LOCATION:-${HOME}/micromamba}"
 RELEASE_URL=https://github.com/mamba-org/micromamba-releases/releases/latest/download/micromamba-linux-64
 
 # Downloading artifact
-mkdir -p ${HOME}/.local/bin/micromamba
+mkdir -p ${HOME}/.local/bin/
 
 wget -qO ${HOME}/.local/bin/micromamba ${RELEASE_URL}
 
-ls -l ${HOME}/.local/bin/micromamba
+ls -la ${HOME}/.local/bin/
 chmod +x ${HOME}/.local/bin/micromamba
 
 # Initializing shell
