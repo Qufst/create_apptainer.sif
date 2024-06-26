@@ -11,16 +11,11 @@ From: alpine:latest
     wget -O environment.yml https://raw.githubusercontent.com/Qufst/create_apptainer.sif/main/environment.yml
 
 
-    # Download micromamba
-    wget -O micromamba.tar.bz2 https://api.anaconda.org/release/conda-forge/micromamba/latest
-    tar -xvjf micromamba.tar.bz2 -C /usr/local/bin --strip-components=1 bin/micromamba
+    wget -qO- https://micromamba.snakepit.net/api/micromamba/linux-64/latest | tar -xvj bin/micromamba
+    ./bin/micromamba shell init -s bash -p ~/micromamba
+    source ~/.bashrc
 
-    ./micromamba shell init -s bash -p ~/micromamba
-    mkdir -p ~/micromamba/pkgs/
-    export MAMBA_ROOT_PREFIX=~/micromamba
-    export MAMBA_EXE=$(pwd)/micromamba
-    . $MAMBA_ROOT_PREFIX/etc/profile.d/mamba.sh
-    ./micromamba create -y -n myenv -f environment.yml
+    micromamba create -y -n myenv -f environment.yml
 
 
 %environment
