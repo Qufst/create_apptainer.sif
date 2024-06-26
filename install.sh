@@ -50,7 +50,7 @@ mkdir -p ${HOME}/.local/bin/
 
 wget -qO ${HOME}/.local/bin/micromamba ${RELEASE_URL}
 
-chmod a+rwx ${HOME}/.local/bin/micromamba
+chmod a+x ${HOME}/.local/bin/micromamba
 ls -la ${HOME}/.local/bin/
 
 # Initializing shell
