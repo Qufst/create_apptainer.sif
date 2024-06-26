@@ -12,7 +12,7 @@ From: alpine:latest
 
     wget -O install-micromamba.sh https://micro.mamba.pm/install.sh
     ls -a
-    install-micromamba.sh
+    . install-micromamba.sh
 
 
     micromamba create -y -n myenv -f environment.yml
