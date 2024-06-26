@@ -7,12 +7,16 @@ From: alpine:latest
     DESCRIPTION "test de création de sif pour computo"
 
 %post
-    apk add curl
-    "${SHELL}" <(curl -L micro.mamba.pm/install.sh)
-    micromamba self-update
+    apk add --no-cache curl
     wget -O environment.yml https://raw.githubusercontent.com/Qufst/create_apptainer.sif/main/environment.yml
-    ls -a
-    micromamba create -y -n myenv -f environment.yml
+
+    curl -L -o /usr/local/bin/micromamba https://micro.mamba.pm/api/micromamba/linux-64/latest
+    chmod +x /usr/local/bin/micromamba
+    mkdir -p /opt/mamba
+    /usr/local/bin/micromamba shell init -s bash -p /opt/mamba
+    export PATH=/opt/mamba/bin:$PATH
+    micromamba create -y -f environment.yml -p /opt/mamba
+    
 %environment
     eval "$(micromamba shell hook --shell )"
     micromamba activate myenv
