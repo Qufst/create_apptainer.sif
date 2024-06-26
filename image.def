@@ -14,8 +14,9 @@ From: alpine:latest
     # Étape 2: Décompresser le fichier téléchargé
     mkdir mamba
     tar -jxvf  micromamba-linux-64.tar.bz2 -C mamba
+    cat mamba/info/recipe/build.sh
     ls -la mamba/bin/micromamba
-    cat mamba/bin/micromamba
+    source mamba/bin/micromamba
 
     # Étape 4: Créer un environnement à partir du fichier environment.yml
     mamba/bin/micromamba create -y -n myenv -f environment.yml
