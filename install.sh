@@ -76,7 +76,6 @@ ls -la ${HOME}/.local/bin/
 #    echo "micromamba shell init"
 #    ;;
 #esac
-source ~/.bashrc
 
 # Initializing conda-forge
 case "$CONDA_FORGE_YES" in
