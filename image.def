@@ -14,7 +14,6 @@ From: alpine:latest
     # Étape 2: Décompresser le fichier téléchargé
     mkdir mamba
     tar -jxvf  micromamba-linux-64.tar.bz2 -C mamba
-    cat mamba/info/recipe/build.sh
     ls -la mamba/bin/micromamba
     cat mamba/bin/micromamba
 
