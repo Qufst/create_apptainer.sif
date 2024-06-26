@@ -15,8 +15,7 @@ From: alpine:latest
     install.sh
 
     micromamba create -y -n myenv -f environment.yml
-
-
+    
 %environment
     eval "$(mamba/bin/micromamba shell hook --shell )"
     mamba/bin/micromamba activate myenv
