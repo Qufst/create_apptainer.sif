@@ -78,10 +78,10 @@ ls -la ${HOME}/.local/bin/
 #esac
 
 # Initializing conda-forge
-case "$CONDA_FORGE_YES" in
-  y|Y|yes)
-    ${HOME}/.local/bin/micromamba config append channels conda-forge
-    ${HOME}/.local/bin/micromamba config append channels nodefaults
-    ${HOME}/.local/bin/micromamba config set channel_priority strict
-    ;;
-esac
+#case "$CONDA_FORGE_YES" in
+#  y|Y|yes)
+#    ${HOME}/.local/bin/micromamba config append channels conda-forge
+#    ${HOME}/.local/bin/micromamba config append channels nodefaults
+#    ${HOME}/.local/bin/micromamba config set channel_priority strict
+#    ;;
+#esac
