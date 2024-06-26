@@ -11,11 +11,11 @@ From: alpine:latest
     wget -O environment.yml https://raw.githubusercontent.com/Qufst/create_apptainer.sif/main/environment.yml
     wget -O install.sh https://raw.githubusercontent.com/Qufst/create_apptainer.sif/main/install.sh
 
-    # Étape 1: Télécharger le fichier micromamba-linux-64.tar.bz2
-    install.sh
+    ls -a
+    ./install.sh
 
     micromamba create -y -n myenv -f environment.yml
-    
+
 %environment
     eval "$(mamba/bin/micromamba shell hook --shell )"
     mamba/bin/micromamba activate myenv
