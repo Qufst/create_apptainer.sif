@@ -46,23 +46,22 @@ PREFIX_LOCATION="${PREFIX_LOCATION:-${HOME}/micromamba}"
 RELEASE_URL=https://github.com/mamba-org/micromamba-releases/releases/latest/download/micromamba-linux-64
 
 # Downloading artifact
-mkdir -p "${BIN_FOLDER}"
-ls -a ${HOME}/.local/bin
+mkdir -p ${HOME}/.local/bin
 if hash curl >/dev/null 2>&1; then
-  curl "${RELEASE_URL}" -o "${BIN_FOLDER}/micromamba" -fsSL --compressed ${CURL_OPTS:-}
+  curl "${RELEASE_URL}" -o ${HOME}/.local/bin/micromamba -fsSL --compressed ${CURL_OPTS:-}
 elif hash wget >/dev/null 2>&1; then
-  wget ${WGET_OPTS:-} -qO "${BIN_FOLDER}/micromamba" "${RELEASE_URL}"
+  wget ${WGET_OPTS:-} -qO ${HOME}/.local/bin/micromamba "${RELEASE_URL}"
 else
   echo "Neither curl nor wget was found" >&2
   exit 1
 fi
-chmod +x "${BIN_FOLDER}/micromamba"
+chmod +x ${HOME}/.local/bin/micromamba
 
 
 # Initializing shell
 case "$INIT_YES" in
   y|Y|yes)
-    case $("${BIN_FOLDER}/micromamba" --version) in
+    case $(${HOME}/.local/bin/micromamba --version) in
       1.*|0.*)
         shell_arg=-s
         prefix_arg=-p
@@ -72,7 +71,7 @@ case "$INIT_YES" in
         prefix_arg=--root-prefix
         ;;
     esac
-    "${BIN_FOLDER}/micromamba" shell init $shell_arg "$shell" $prefix_arg "$PREFIX_LOCATION"
+    ${HOME}/.local/bin/micromamba shell init $shell_arg "$shell" $prefix_arg "$PREFIX_LOCATION"
 
     echo "Please restart your shell to activate micromamba or run the following:\n"
     echo "  source ~/.bashrc (or ~/.zshrc, ~/.xonshrc, ~/.config/fish/config.fish, ...)"
@@ -87,8 +86,8 @@ esac
 # Initializing conda-forge
 case "$CONDA_FORGE_YES" in
   y|Y|yes)
-    "${BIN_FOLDER}/micromamba" config append channels conda-forge
-    "${BIN_FOLDER}/micromamba" config append channels nodefaults
-    "${BIN_FOLDER}/micromamba" config set channel_priority strict
+    ${HOME}/.local/bin/micromamba config append channels conda-forge
+    ${HOME}/.local/bin/micromamba config append channels nodefaults
+    ${HOME}/.local/bin/micromamba config set channel_priority strict
     ;;
 esac
