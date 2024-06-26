@@ -10,13 +10,21 @@ From: alpine:latest
     apk add wget tar bzip2 bash curl
     wget -O environment.yml https://raw.githubusercontent.com/Qufst/create_apptainer.sif/main/environment.yml
 
-    "${SHELL}" <(curl -L https://micro.mamba.pm/install.sh)
+    wget -O install-micromamba.sh https://micro.mamba.pm/install.sh
+    bash install-micromamba.sh -p ~/micromamba -s bash
+
+    export MAMBA_ROOT_PREFIX=~/micromamba
+    export MAMBA_EXE=$MAMBA_ROOT_PREFIX/bin/micromamba
+    . $MAMBA_ROOT_PREFIX/etc/profile.d/mamba.sh
 
 
     micromamba create -y -n myenv -f environment.yml
 
 
 %environment
+    export MAMBA_ROOT_PREFIX=~/micromamba
+    export MAMBA_EXE=$MAMBA_ROOT_PREFIX/bin/micromamba
+    . $MAMBA_ROOT_PREFIX/etc/profile.d/mamba.sh
     eval "$(micromamba shell hook --shell )"
     micromamba activate myenv
 %help
