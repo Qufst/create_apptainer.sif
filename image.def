@@ -7,6 +7,7 @@ From: alpine:latest
     DESCRIPTION "test de création de sif pour computo"
 
 %post
+    apk update curl
     "${SHELL}" <(curl -L micro.mamba.pm/install.sh)
     micromamba self-update
     wget -O environment.yml https://raw.githubusercontent.com/Qufst/create_apptainer.sif/main/environment.yml
