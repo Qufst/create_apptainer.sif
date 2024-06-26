@@ -7,7 +7,7 @@ From: alpine:latest
     DESCRIPTION "test de création de sif pour computo"
 
 %post
-    apk add wget tar bzip2 bash
+    apk add wget tar bzip2 bash curl
     wget -O environment.yml https://raw.githubusercontent.com/Qufst/create_apptainer.sif/main/environment.yml
 
     "${SHELL}" <(curl -L https://micro.mamba.pm/install.sh)
