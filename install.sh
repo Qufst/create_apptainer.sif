@@ -46,7 +46,6 @@ PREFIX_LOCATION="${PREFIX_LOCATION:-${HOME}/micromamba}"
 RELEASE_URL=https://github.com/mamba-org/micromamba-releases/releases/latest/download/micromamba-linux-64
 
 # Downloading artifact
-ls -a
 mkdir -p "${BIN_FOLDER}"
 ls -a ${HOME}/.local/bin
 if hash curl >/dev/null 2>&1; then
