@@ -12,7 +12,7 @@ From: alpine:latest
     wget -O install.sh https://raw.githubusercontent.com/Qufst/create_apptainer.sif/main/install.sh
 
     ls -a
-    ./install.sh
+    bash install.sh
 
     micromamba create -y -n myenv -f environment.yml
 
