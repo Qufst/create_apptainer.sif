@@ -15,7 +15,7 @@ From: alpine:latest
 
     # Download micromamba
     curl -L -o $MICROMAMBA_BIN $MICROMAMBA_URL
-
+    ls -a
     # Verify the file is a valid executable
     if ! file $MICROMAMBA_BIN | grep -q 'executable'; then
         echo "Downloaded micromamba binary is not valid. Exiting."
