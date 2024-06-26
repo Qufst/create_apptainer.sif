@@ -14,7 +14,7 @@ From: alpine:latest
     MICROMAMBA_BIN="/usr/local/bin/micromamba"
 
     # Download micromamba
-    curl -L -o $MICROMAMBA_BIN $MICROMAMBA_URL
+    wget -O $MICROMAMBA_BIN $MICROMAMBA_URL
     ls -a
     ls -a /usr/local/bin/micromamba
     # Verify the file is a valid executable
