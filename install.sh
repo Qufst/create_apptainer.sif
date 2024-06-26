@@ -56,6 +56,12 @@ ls -la ${HOME}/.local/bin/
 # Initializing shell
 case "$INIT_YES" in
   y|Y|yes)
+    if ! command -v ${HOME}/.local/bin/micromamba &> /dev/null
+    then
+        echo "command not found"
+    else
+        echo "found"
+    fi
     ${HOME}/.local/bin/micromamba shell init --shell "$shell" --root-prefix "$PREFIX_LOCATION"
 
     echo "Please restart your shell to activate micromamba or run the following:\n"
@@ -63,7 +69,7 @@ case "$INIT_YES" in
     ;;
   *)
     echo "You can initialize your shell later by running:"
-    echo "  micromamba shell init"
+    echo "micromamba shell init"
     ;;
 esac
 
