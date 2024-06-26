@@ -12,15 +12,20 @@ From: alpine:latest
 
     wget -qO- micromamba.tar.bz2 https://github.com/mamba-org/micromamba-releases/releases/latest/download/micromamba-linux-64.tar.bz2
     tar -xvjf micromamba.tar.bz2 -C /usr/local/bin --strip-components=1
-    chmod +x micromamba-linux-64
-    ./micromamba-linux-64
-    micromamba --version
+    /usr/local/bin/micromamba shell init -s bash -p ~/micromamba
+    mkdir -p ~/micromamba/pkgs/
+    export MAMBA_ROOT_PREFIX=~/micromamba
+    export MAMBA_EXE=/usr/local/bin/micromamba
+    . $MAMBA_ROOT_PREFIX/etc/profile.d/mamba.sh
 
 
-    micromamba create -y -n myenv -f environment.yml
+    /usr/local/bin/micromamba create -y -n myenv -f environment.yml
 
 
 %environment
+    export MAMBA_ROOT_PREFIX=~/micromamba
+    export MAMBA_EXE=/usr/local/bin/micromamba
+    . $MAMBA_ROOT_PREFIX/etc/profile.d/mamba.sh
     eval "$(micromamba shell hook --shell )"
     micromamba activate myenv
 %help
