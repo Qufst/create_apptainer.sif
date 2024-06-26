@@ -7,31 +7,29 @@ From: alpine:latest
     DESCRIPTION "test de création de sif pour computo"
 
 %post
-    apk add --no-cache curl
     wget -O environment.yml https://raw.githubusercontent.com/Qufst/create_apptainer.sif/main/environment.yml
 
-    MICROMAMBA_URL="https://micro.mamba.pm/api/micromamba/linux-64/latest"
-    MICROMAMBA_BIN="/usr/local/bin/micromamba"
 
     # Download micromamba
-    wget -O $MICROMAMBA_BIN $MICROMAMBA_URL
+    wget -O /usr/local/bin/micromamba https://micro.mamba.pm/api/micromamba/linux-64/latest
+
     ls -a
     ls -a /usr/local/bin/micromamba
-    # Verify the file is a valid executable
-    if ! file $MICROMAMBA_BIN | grep -q 'executable'; then
-        echo "Downloaded micromamba binary is not valid. Exiting."
-        exit 1
-    fi
 
-    # Make micromamba executable
-    chmod +x $MICROMAMBA_BIN
+    # Rendre Micromamba exécutable
+    chmod +x /usr/local/bin/micromamba
 
-    # Create micromamba environment
+    # Créer un répertoire pour l'environnement conda
     mkdir -p /opt/mamba
-    $MICROMAMBA_BIN shell init -s bash -p /opt/mamba
 
-    # Create the environment
-    $MICROMAMBA_BIN create -y -n myenv -f environment.yml
+    # Initialiser Micromamba
+    /usr/local/bin/micromamba shell init -s bash -p /opt/mamba
+
+    # Ajouter Micromamba au PATH
+    export PATH=/opt/mamba/bin:$PATH
+
+    # Créer l'environnement conda à partir du fichier environment.yml
+    micromamba create -y -f /environment.yml -p /opt/mamba
     
 %environment
     eval "$(micromamba shell hook --shell )"
