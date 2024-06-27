@@ -17,18 +17,18 @@ jobs:
 
       - uses: eWaterCycle/setup-apptainer@v2
         with:
-          apptainer-version: 1.3.0
+          apptainer-version: 1.3.2
 
 #sudo install-dir/bin/apptainer config fakeroot --add $HOME
       - name: Create sif with apptainer
         run: |
           sudo chmod -R ugo+rwx install.sh
-          install-dir/bin/apptainer build --fix-perms --sandbox /tmp/container.sif image.def
+          apptainer build --fix-perms --sandbox image.sif image.def
 
       - name: Upload .sif in an artifact
         uses: actions/upload-artifact@v3
         with:
           name: apptainer-image
-          path: /tmp/container.sif
+          path: image.sif
         
 
