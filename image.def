@@ -13,7 +13,7 @@ From: alpine:latest
     wget -O opt/install.sh https://raw.githubusercontent.com/Qufst/create_apptainer.sif/main/install.sh
     chmod -R ugo+rwx sbin/install.sh
     bash opt/install.sh
-    ls -la sbin/
+    ls -la opt/
     opt/micromamba shell hook --shell
     opt/micromamba create -y -n myenv -f opt/environment.yml
 
