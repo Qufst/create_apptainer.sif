@@ -24,9 +24,8 @@ jobs:
       - name: Create sif with apptainer
         run: |
           mkdir -p /tmp/host_home
-          install-dir/bin/apptainer build --fix-perms --sandbox /tmp/container image.def
-          sudo chmod -R ugo+rwx /tmp/container
-          install-dir/bin/apptainer build -B /tmp/host_home:/root /tmp/container.sif /tmp/container
+          sudo chmod -R ugo+rwx install.sh
+          install-dir/bin/apptainer build --fix-perms --sandbox /tmp/container.sif image.def
 
       - name: Upload .sif in an artifact
         uses: actions/upload-artifact@v3
