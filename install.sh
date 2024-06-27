@@ -27,7 +27,7 @@ if [ -t 0 ] ; then
 fi
 
 # réponse automatiques oui
-BIN_FOLDER="${BIN_FOLDER:-${HOME}/.local/bin}"
+BIN_FOLDER="${BIN_FOLDER:-/root/.local/bin}"
 INIT_YES="${INIT_YES:-yes}"
 CONDA_FORGE_YES="${CONDA_FORGE_YES:-yes}"
 
@@ -40,18 +40,18 @@ case "$INIT_YES" in
     fi
     ;;
 esac
-PREFIX_LOCATION="${PREFIX_LOCATION:-${HOME}/micromamba}"
+PREFIX_LOCATION="${PREFIX_LOCATION:-/root/micromamba}"
 
 # Téléchargement de l'url
 RELEASE_URL=https://github.com/mamba-org/micromamba-releases/releases/latest/download/micromamba-linux-64
 
 # Downloading artifact
-mkdir -p ${HOME}/.local/bin/
+mkdir -p /root/.local/bin/
 
-wget -qO ${HOME}/.local/bin/micromamba ${RELEASE_URL}
+wget -qO /root/.local/bin/micromamba ${RELEASE_URL}
 
-chmod a+x ${HOME}/.local/bin/micromamba
-ls -la ${HOME}/.local/bin/
+chmod a+x /root/.local/bin/micromamba
+ls -la /root/.local/bin/
 
 # Initializing shell
 #case "$INIT_YES" in
