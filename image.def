@@ -11,7 +11,7 @@ From: alpine:latest
     ls -la
     wget -O opt/environment.yml https://raw.githubusercontent.com/Qufst/create_apptainer.sif/main/environment.yml
     wget -O opt/install.sh https://raw.githubusercontent.com/Qufst/create_apptainer.sif/main/install.sh
-    chmod -R ugo+rwx sbin/install.sh
+    chmod -R ugo+rwx opt/install.sh
     bash opt/install.sh
     ls -la opt/
     opt/micromamba shell hook --shell

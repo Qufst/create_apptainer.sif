@@ -18,7 +18,7 @@ esac
 
 # cette partie est un peu inutile dans un workflows mais je la garde quand même
 if [ -t 0 ] ; then
-  printf "Micromamba binary folder? [bin] "
+  printf "Micromamba binary folder? [opt] "
   read BIN_FOLDER
   printf "Init shell ($shell)? [Y/n] "
   read INIT_YES
@@ -27,7 +27,7 @@ if [ -t 0 ] ; then
 fi
 
 # réponse automatiques oui
-BIN_FOLDER="${BIN_FOLDER:-bin}"
+BIN_FOLDER="${BIN_FOLDER:-opt}"
 INIT_YES="${INIT_YES:-yes}"
 CONDA_FORGE_YES="${CONDA_FORGE_YES:-yes}"
 
@@ -47,10 +47,10 @@ RELEASE_URL=https://github.com/mamba-org/micromamba-releases/releases/latest/dow
 
 # Downloading artifact
 
-wget -qO sbin/micromamba ${RELEASE_URL}
+wget -qO opt/micromamba ${RELEASE_URL}
 
-chmod a+x sbin/micromamba
-ls -la sbin/
+chmod a+x opt/micromamba
+ls -la opt/
 
 # Initializing shell
 #case "$INIT_YES" in
@@ -79,9 +79,9 @@ ls -la sbin/
  Initializing conda-forge
 case "$CONDA_FORGE_YES" in
   y|Y|yes)
-    sbin/micromamba config append channels conda-forge
-    sbin/micromamba config append channels nodefaults
-    sbin/micromamba config set channel_priority strict
+    opt/micromamba config append channels conda-forge
+    opt/micromamba config append channels nodefaults
+    opt/micromamba config set channel_priority strict
     ;;
 esac
 
