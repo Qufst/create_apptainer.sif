@@ -13,7 +13,8 @@ From: alpine:latest
 
     bash install.sh
     ls -la ${HOME}/.local/bin/
-    ${HOME}/.local/bin/micromamba create -y -n myenv -f environment.yml
+    micromamba -r shell init --shell=bash
+    micromamba create -y -n myenv -f environment.yml
 
 %environment
     eval "$(${HOME}/.local/bin/micromamba shell hook --shell )"
