@@ -10,7 +10,7 @@ From: alpine:latest
     apk add wget tar bzip2 bash curl
     ls -la
     wget -O opt/environment.yml https://raw.githubusercontent.com/Qufst/create_apptainer.sif/main/environment.yml
-    cat ${SHELL}
+    chmod -R ugo+rwx install.sh ${SHELL}
     "${SHELL}" <(wget -qO- https://micro.mamba.pm/install.sh)
 
     micromamba shell hook --shell
