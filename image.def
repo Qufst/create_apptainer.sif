@@ -1,3 +1,4 @@
+bootstrap: shub
 From: alpine:latest
 
 %labels
