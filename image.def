@@ -1,4 +1,4 @@
-bootstrap: shub
+Bootstrap: docker
 From: alpine:latest
 
 %labels
