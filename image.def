@@ -9,10 +9,18 @@ From: alpine:latest
 %post
     apk add wget tar bzip2 bash curl
     wget -O environment.yml https://raw.githubusercontent.com/Qufst/create_apptainer.sif/main/environment.yml
-    curl -L  https://micro.mamba.pm/api/micromamba/linux-${ARCH}/${VERSION} | tar -xvz -C /tmp bin/micromamba
-    ls -la /tmp
-    echo "a"
-    ls -la bin/micromamba
+
+    wget -O install.sh https://raw.githubusercontent.com/Qufst/create_apptainer.sif/main/install.sh
+    bash install.sh
+    ls -la /root/.local/bin/
+    ${HOME}/.local/bin/micromamba shell hook --shell
+    ${HOME}/.local/bin/micromamba create -y -n myenv -f environment.yml
+    wget -O install.sh https://raw.githubusercontent.com/Qufst/create_apptainer.sif/main/install.sh
+
+    bash install.sh
+    ls -la /root/.local/bin/
+    ${HOME}/.local/bin/micromamba shell hook --shell
+    ${HOME}/.local/bin/micromamba create -y -n myenv -f environment.yml
     
 
 %environment
