@@ -12,8 +12,9 @@ From: alpine:latest
     wget -O install.sh https://raw.githubusercontent.com/Qufst/create_apptainer.sif/main/install.sh
 
     bash install.sh
-    eval "$(${HOME}/.local/bin/micromamba shell hook --shell )"
-    eval "$(${HOME}/.local/bin/micromamba create -y -n myenv -f environment.yml)"
+    ls -ls ${HOME}/.local/bin/micromamba
+    ${HOME}/.local/bin/micromamba shell hook --shell
+    ${HOME}/.local/bin/micromamba create -y -n myenv -f environment.yml
 
 %environment
     ${HOME}/.local/bin/micromamba activate myenv
