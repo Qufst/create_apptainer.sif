@@ -20,13 +20,9 @@ jobs:
           sudo apt-get install -y curl rpm2cpio cpio
           curl -s https://raw.githubusercontent.com/apptainer/apptainer/main/tools/install-unprivileged.sh | bash -s - install-dir
 
-
+#sudo install-dir/bin/apptainer config fakeroot --add $HOME
       - name: Create sif with apptainer
         run: |
-          USER="runner"
-          HOME="/home/runner"
-          sudo install-dir/bin/apptainer config fakeroot --add $USER
-          sudo install-dir/bin/apptainer config fakeroot --add $HOME
           install-dir/bin/apptainer build --fakeroot image.sif image.def
 
       - name: upload .sif in an artifact
