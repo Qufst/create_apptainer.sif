@@ -23,7 +23,8 @@ jobs:
 
       - name: Create sif with apptainer
         run: |
-          sudo install-dir/bin/apptainer config fakeroot --add $USER ${HOME}
+          sudo install-dir/bin/apptainer config fakeroot --add $USER
+          sudo install-dir/bin/apptainer config fakeroot --add ${HOME}
           install-dir/bin/apptainer build --fakeroot image.sif image.def
 
       - name: upload .sif in an artifact
