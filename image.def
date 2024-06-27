@@ -11,17 +11,12 @@ From: alpine:latest
     wget -O environment.yml https://raw.githubusercontent.com/Qufst/create_apptainer.sif/main/environment.yml
 
     wget -O install.sh https://raw.githubusercontent.com/Qufst/create_apptainer.sif/main/install.sh
+    find / -writable 2>/dev/null
     bash install.sh
     ls -la ${HOME}/.local/bin/
     ${HOME}/.local/bin/micromamba shell hook --shell
     ${HOME}/.local/bin/micromamba create -y -n myenv -f environment.yml
-    wget -O install.sh https://raw.githubusercontent.com/Qufst/create_apptainer.sif/main/install.sh
 
-    bash install.sh
-    find / -writable 2>/dev/null
-
-    ${HOME}/.local/bin/micromamba shell hook --shell
-    ${HOME}/.local/bin/micromamba create -y -n myenv -f environment.yml
     
 
 %environment
