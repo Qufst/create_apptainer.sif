@@ -13,11 +13,12 @@ From: alpine:latest
 
     bash install.sh
     ls -la ${HOME}/.local/bin/
-    micromamba -r shell init --shell=bash
+    find . -name micromamba
+    ${HOME}/.local/bin/micromamba -r shell init -s -p ${HOME}/micromamba
     micromamba create -y -n myenv -f environment.yml
 
 %environment
     eval "$(${HOME}/.local/bin/micromamba shell hook --shell )"
-   ${HOME}/.local/bin/micromamba activate myenv
+    ${HOME}/.local/bin/micromamba activate myenv
 %help
     Utilisation : apptainer run image.sif --option
