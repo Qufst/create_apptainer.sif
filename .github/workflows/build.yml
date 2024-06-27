@@ -23,12 +23,14 @@ jobs:
 #sudo install-dir/bin/apptainer config fakeroot --add $HOME
       - name: Create sif with apptainer
         run: |
-          install-dir/bin/apptainer build --fakeroot image.sif image.def
+          mkdir -p /mnt/host_home
+          install-dir/bin/apptainer build --sandbox /tmp/container image.def
+          install-dir/bin/apptainer build -B /mnt/host_home:/root /tmp/container.sif /tmp/container
 
-      - name: upload .sif in an artifact
+      - name: Upload .sif in an artifact
         uses: actions/upload-artifact@v3
         with:
           name: apptainer-image
-          path: image.sif
+          path: /tmp/container.sif
         
 

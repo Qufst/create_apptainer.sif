@@ -8,18 +8,16 @@ From: alpine:latest
 
 %post
     apk add wget tar bzip2 bash curl
-    wget -O environment.yml https://raw.githubusercontent.com/Qufst/create_apptainer.sif/main/environment.yml
-
-    wget -O install.sh https://raw.githubusercontent.com/Qufst/create_apptainer.sif/main/install.sh
-    find / -writable 2>/dev/null
-    bash install.sh
-    ls -la ${HOME}/.local/bin/
-    ${HOME}/.local/bin/micromamba shell hook --shell
-    ${HOME}/.local/bin/micromamba create -y -n myenv -f environment.yml
-
-    
+    wget -O /root/environment.yml https://raw.githubusercontent.com/Qufst/create_apptainer.sif/main/environment.yml
+    wget -O /root/install.sh https://raw.githubusercontent.com/Qufst/create_apptainer.sif/main/install.sh
+    bash /root/install.sh
+    ls -la /root/.local/bin/
+    /root/.local/bin/micromamba shell hook --shell
+    /root/.local/bin/micromamba create -y -n myenv -f /root/environment.yml
 
 %environment
+    export HOME=/root
     micromamba activate myenv
+
 %help
     Utilisation : apptainer run image.sif --option
