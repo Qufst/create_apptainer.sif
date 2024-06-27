@@ -9,16 +9,13 @@ From: alpine:latest
 %post
     apk add wget tar bzip2 bash curl
     wget -O environment.yml https://raw.githubusercontent.com/Qufst/create_apptainer.sif/main/environment.yml
-    wget -qO-  https://micromamba.snakepit.net/api/micromamba/linux-64/latest | tar -xvj -C /usr/local/bin bin/micromamba
-    touch /root/.bashrc
-    /usr/local/bin/micromamba shell init -s bash -p /opt/conda
-    rm -rf /var/cache/apk/
-    source /root/.bashrc
-    /usr/local/bin/micromamba create -y -n myenv -f environment.yml
-
+    wget -qO-  https://micro.mamba.pm/api/micromamba/linux-${ARCH}/${VERSION} | tar -xvj -C /tmp bin/micromamba
+    ls -la /tmp
+    echo "a"
+    ls -la bin/micromamba
+    
 
 %environment
-    source /opt/conda/etc/profile.d/mamba.sh
     micromamba activate myenv
 %help
     Utilisation : apptainer run image.sif --option
