@@ -13,10 +13,9 @@ From: alpine:latest
 
     bash install.sh
     eval "$(${HOME}/.local/bin/micromamba shell hook --shell )"
-    micromamba create -y -n myenv -f environment.yml
+    eval "$(${HOME}/.local/bin/micromamba create -y -n myenv -f environment.yml)"
 
 %environment
-    eval "$(${HOME}/.local/bin/micromamba shell hook --shell )"
     ${HOME}/.local/bin/micromamba activate myenv
 %help
     Utilisation : apptainer run image.sif --option
