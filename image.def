@@ -9,12 +9,15 @@ From: alpine:latest
 %post
     apk add wget tar bzip2 bash curl
     wget -O environment.yml https://raw.githubusercontent.com/Qufst/create_apptainer.sif/main/environment.yml
-    wget -O install.sh https://raw.githubusercontent.com/Qufst/create_apptainer.sif/main/install.sh
+    wget -qO-  https://micromamba.snakepit.net/api/micromamba/linux-64/latest | tar -xvj bin/micromamba
+    touch /root/.bashrc
+    ./bin/micromamba shell init -s bash -p /opt/conda
+    grep -v '[ -z "\$PS1" ] && return' /root/.bashrc  > /opt/conda/bashrc
+    apt-get clean autoremove --yes
+    rm -rf /var/lib/{apt,dpkg,cache,log}
+    source /opt/conda/bashrc
+    micromamba create -y -n myenv -f environment.yml
 
-    bash install.sh
-    ls -la /root/.local/bin/
-    /root/.local/bin/micromamba shell hook --shell
-    /root/.local/bin/micromamba create -y -n myenv -f environment.yml
 
 %environment
     /root/.local/bin/micromamba activate myenv
