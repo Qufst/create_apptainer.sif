@@ -9,7 +9,7 @@ From: alpine:latest
 %post
     apk add wget tar bzip2 bash curl
     wget -O environment.yml https://raw.githubusercontent.com/Qufst/create_apptainer.sif/main/environment.yml
-    curl -L  https://micro.mamba.pm/api/micromamba/linux-${ARCH}/${VERSION} | tar -xvj -C /tmp bin/micromamba
+    curl -L  https://micro.mamba.pm/api/micromamba/linux-${ARCH}/${VERSION} | tar -xvz -C /tmp bin/micromamba
     ls -la /tmp
     echo "a"
     ls -la bin/micromamba
