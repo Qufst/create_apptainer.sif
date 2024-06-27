@@ -12,8 +12,6 @@ From: alpine:latest
     wget -O install.sh https://raw.githubusercontent.com/Qufst/create_apptainer.sif/main/install.sh
 
     bash install.sh
-    ls -la ${HOME}/.local/bin/
-    find . -name micromamba
     ${HOME}/.local/bin/micromamba -r shell init -s -p ${HOME}/micromamba
     micromamba create -y -n myenv -f environment.yml
 
