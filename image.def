@@ -22,11 +22,15 @@ From: alpine:3.17
 
     # Installer Micromamba
     wget -O opt/environment.yml https://raw.githubusercontent.com/Qufst/create_apptainer.sif/main/environment.yml
-    curl -Ls https://micro.mamba.pm/install.sh | bash -s -b /opt/micromamba
+    wget -O miniconda.sh https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh
+    bash miniconda.sh -b -p /opt/miniconda
+    rm miniconda.sh
+    export PATH=/opt/miniconda/bin:$PATH
+    conda install -y -c conda-forge micromamba
 
     # Créer un environnement Micromamba et installer des paquets de base
-    /opt/micromamba/bin/micromamba create -y -n myenv -f opt/environment.yml && \
-    /opt/micromamba/bin/micromamba clean --all --yes
+    micromamba create -y -n myenv -f opt/environment.yml && \
+    micromamba clean --all --yes
 
 %runscript
     exec /bin/bash "$@"
