@@ -1,10 +1,12 @@
 Bootstrap: docker
-From: continuumio/miniconda3:4.7.12-alpine
+From: continuumio/miniconda3:4.10.3-alpine
 
 %help
     Container with conda on Alpine Linux.
 
 %environment
+    export PATH=/opt/conda/envs/myenv/bin:$PATH
+    export CONDA_DEFAULT_ENV=myenv
     conda activate myenv
 
 %post
@@ -15,6 +17,10 @@ From: continuumio/miniconda3:4.7.12-alpine
     wget -O opt/environment.yml https://raw.githubusercontent.com/Qufst/create_apptainer.sif/main/environment.yml
     conda env create -n myenv -f opt/environment.yml
     conda update --all
+
+%runscript
+    # This script will be executed when the container is run
+    exec "$@"
 
 
 
