@@ -7,6 +7,7 @@ From: continuumio/miniconda3:4.10.3-alpine
 %environment
     export PATH=/opt/conda/envs/myenv/bin:$PATH
     export CONDA_DEFAULT_ENV=myenv
+    mamba init
     mamba activate myenv
 
 %post
