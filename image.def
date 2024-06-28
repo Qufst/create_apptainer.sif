@@ -6,22 +6,23 @@ From: alpine:latest
     VERSION 1.0
     DESCRIPTION "test de création de sif pour computo"
 
+%startscript
+
+
+%setup
+    cd /
+    touch .condarc
+
 %post
-    apk add wget tar bzip2 bash curl
-    ls -la
-    wget -O opt/environment.yml https://raw.githubusercontent.com/Qufst/create_apptainer.sif/main/environment.yml
-    curl -Ls https://micro.mamba.pm/install.sh | bash
-
-    bash install.sh
-    
-
-
-    micromamba shell hook --shell
-    micromamba create -y -n myenv -f opt/environment.yml
+    apk add wget bzip2 bash curl git
+    wget -O environment.yml https://raw.githubusercontent.com/Qufst/create_apptainer.sif/main/environment.yml
+    wget -c https://micro.mamba.pm/install.sh
+    /bin/bash install.sh -bfp /usr/local
+    micromamba create -y -n myenv -f environment.yml
 
 %environment
     micromamba activate myenv
 
 %help
-    Utilisation : apptainer run image.sif --option
+    Container with micromamba and myenv
 

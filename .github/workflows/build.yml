@@ -23,7 +23,8 @@ jobs:
       - name: Create sif with apptainer
         run: |
           sudo chmod -R ugo+rwx install.sh
-          apptainer build --fix-perms --sandbox image.sif image.def
+          apptainer build --fakeroot image.sif image.def
+
 
       - name: Upload .sif in an artifact
         uses: actions/upload-artifact@v3

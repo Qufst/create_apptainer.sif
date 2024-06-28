@@ -86,18 +86,16 @@ case "$CONDA_FORGE_YES" in
 esac
 
 
-
-
-
-#    wget -O install.sh https://raw.githubusercontent.com/Qufst/create_apptainer.sif/main/install.sh
-
-#    bash install.sh
-#    ls -la /root/.local/bin/
-#    /root/.local/bin/micromamba shell hook --shell
-#    /root/.local/bin/micromamba create -y -n myenv -f environment.yml
-#    wget -O install.sh https://raw.githubusercontent.com/Qufst/create_apptainer.sif/main/install.sh
+#    ls -la
+#    wget -O opt/environment.yml https://raw.githubusercontent.com/Qufst/create_apptainer.sif/main/environment.yml
+#    curl -Ls https://micro.mamba.pm/install.sh | bash
 #
 #    bash install.sh
-#    ls -la /root/.local/bin/
-#    /root/.local/bin/micromamba shell hook --shell
-#    /root/.local/bin/micromamba create -y -n myenv -f environment.yml
+#    
+#
+#
+#    micromamba shell hook --shell
+#    micromamba create -y -n myenv -f opt/environment.yml
+#
+#%environment
+#    micromamba activate myenv
