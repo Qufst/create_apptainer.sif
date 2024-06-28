@@ -11,6 +11,10 @@ From: alpine:latest
     ls -la
     wget -O opt/environment.yml https://raw.githubusercontent.com/Qufst/create_apptainer.sif/main/environment.yml
     wget -qO- https://micro.mamba.pm/install.sh
+    ls -la
+    bash install.sh
+    
+
 
     micromamba shell hook --shell
     micromamba create -y -n myenv -f opt/environment.yml
