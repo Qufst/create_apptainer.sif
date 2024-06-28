@@ -1,5 +1,5 @@
 Bootstrap: docker
-From: alpine:3.17
+From: drtools/alpine-miniconda
 
 %help
     Container with Micromamba on Alpine Linux.
@@ -21,18 +21,14 @@ From: alpine:3.17
 
     # Installer Micromamba
     wget -O opt/environment.yml https://raw.githubusercontent.com/Qufst/create_apptainer.sif/main/environment.yml
-    wget -O miniconda.sh https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh
-    mkdir -p /opt/miniconda
-    bash miniconda.sh -s -p /opt/miniconda
-    rm miniconda.sh
-    export PATH=/opt/miniconda/bin:$PATH
     conda install -y -c conda-forge micromamba
 
     # Créer un environnement Micromamba et installer des paquets de base
-    micromamba create -y -n myenv -f opt/environment.yml && \
+    micromamba create -y -n myenv -f opt/environment.yml
     micromamba clean --all --yes
 
 %runscript
+    micromamba activate myenv
     exec /bin/bash "$@"
 
 %startscript
