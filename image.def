@@ -18,6 +18,10 @@ From: alpine
     # Installer Micromamba
     wget -O opt/environment.yml https://raw.githubusercontent.com/Qufst/create_apptainer.sif/main/environment.yml
     wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh
+    sha256sum Miniconda3-latest-Linux-x86_64.sh
+    df -h
+    mkdir -p /opt/conda
+    chmod -R 777 /opt/conda
     bash Miniconda3-latest-Linux-x86_64.sh -b -f -p /opt/conda
     rm Miniconda3-latest-Linux-x86_64.sh
     . /opt/conda/etc/profile.d/conda.sh
