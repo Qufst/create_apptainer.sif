@@ -2,26 +2,34 @@ Bootstrap: docker
 From: debian:9
 
 %help
-    Container with conda on Alpine Linux.
+    Container with conda on Debian Linux.
 
 %environment
-    conda activate myenv
+    # This sets the default environment to 'myenv' when the container starts
+    export PATH=/usr/local/envs/myenv/bin:$PATH
+    export CONDA_DEFAULT_ENV=myenv
+
+%setup
+    # Create the .condarc file where the environments/channels from conda are specified
+    touch ${SINGULARITY_ROOTFS}/.condarc
 
 %post
+    # Update apt and install necessary packages
     apt-get update && apt-get -y upgrade
     apt-get -y install \
-    build-essential \
-    wget \
-    bzip2 \
-    ca-certificates \
-    libglib2.0-0 \
-    libxext6 \
-    libsm6 \
-    libxrender1 \
-    git
+        build-essential \
+        wget \
+        bzip2 \
+        ca-certificates \
+        libglib2.0-0 \
+        libxext6 \
+        libsm6 \
+        libxrender1 \
+        git
     rm -rf /var/lib/apt/lists/*
     apt-get clean
 
+    wget -O /opt/environment.yml https://raw.githubusercontent.com/Qufst/create_apptainer.sif/main/environment.yml
     #Installing Miniconda
     wget -c https://repo.anaconda.com/miniconda/Miniconda3-py39_23.1.0-1-Linux-x86_64.sh
     /bin/bash Miniconda3-py39_23.1.0-1-Linux-x86_64.sh -bfp /usr/local
