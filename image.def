@@ -8,6 +8,8 @@ From: continuumio/miniconda3:4.10.3-alpine
     export PATH=/opt/conda/envs/myenv/bin:$PATH
     export CONDA_DEFAULT_ENV=myenv
     mamba activate myenv
+    mamba --version
+    mamba env list
 
 %post
     apk update && apk add --no-cache \
