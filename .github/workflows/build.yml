@@ -19,11 +19,9 @@ jobs:
         with:
           apptainer-version: 1.3.2
 
-#sudo install-dir/bin/apptainer config fakeroot --add $HOME
       - name: Create sif with apptainer
         run: |
-          apptainer build --sandbox --fix-perms image.sif image.def
-
+          apptainer build --sandbox image.sif image.def
 
       - name: Upload .sif in an artifact
         uses: actions/upload-artifact@v3
