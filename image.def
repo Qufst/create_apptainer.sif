@@ -21,7 +21,10 @@ From: drtools/alpine-miniconda
 
     # Installer Micromamba
     wget -O opt/environment.yml https://raw.githubusercontent.com/Qufst/create_apptainer.sif/main/environment.yml
-    conda install -y -c conda-forge micromamba
+    conda config --set ssl_verify true
+    conda update conda
+
+    conda install -y -c conda-forge micromamba --insecure
 
     # Créer un environnement Micromamba et installer des paquets de base
     micromamba create -y -n myenv -f opt/environment.yml
