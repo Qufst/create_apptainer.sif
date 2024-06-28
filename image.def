@@ -23,7 +23,7 @@ From: alpine:3.17
     wget -O opt/environment.yml https://raw.githubusercontent.com/Qufst/create_apptainer.sif/main/environment.yml
     wget -O miniconda.sh https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh
     mkdir -p /opt/miniconda
-    bash miniconda.sh -b -p /opt/miniconda
+    bash miniconda.sh -s -p /opt/miniconda
     rm miniconda.sh
     export PATH=/opt/miniconda/bin:$PATH
     conda install -y -c conda-forge micromamba
