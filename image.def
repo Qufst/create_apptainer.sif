@@ -7,7 +7,6 @@ From: continuumio/miniconda3:4.10.3-alpine
 %environment
     export PATH=/opt/conda/envs/myenv/bin:$PATH
     export CONDA_DEFAULT_ENV=myenv
-    mamba init
     mamba activate myenv
 
 %post
@@ -20,6 +19,7 @@ From: continuumio/miniconda3:4.10.3-alpine
     mamba env create -n myenv -f /opt/environment.yml
     conda clean -afy
     apk del wget
+    mamba init
 
 %runscript
     # This script will be executed when the container is run
