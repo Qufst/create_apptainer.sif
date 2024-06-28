@@ -22,7 +22,6 @@ jobs:
 #sudo install-dir/bin/apptainer config fakeroot --add $HOME
       - name: Create sif with apptainer
         run: |
-          sudo chmod -R ugo+rwx install.sh
           apptainer build --fakeroot image.sif image.def
 
 
