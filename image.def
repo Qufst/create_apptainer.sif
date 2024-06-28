@@ -15,13 +15,9 @@ From: debian:9
 
 %post
     # Update apt and install necessary packages
-    apt-get update && apt-get -y upgrade
-    apt-get -y install \
-        build-essential \
-        wget \
-
-    rm -rf /var/lib/apt/lists/*
-    apt-get clean
+    apk update && apk add --no-cache \
+        bash \
+        wget
 
     wget -O /opt/environment.yml https://raw.githubusercontent.com/Qufst/create_apptainer.sif/main/environment.yml
     #Installing Miniconda
