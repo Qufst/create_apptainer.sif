@@ -1,34 +1,24 @@
 Bootstrap: docker
-From: debian:9
+From: continuumio/miniconda3:4.10.3-alpine
 
 %help
-    Container with conda on Debian Linux.
+    Container with conda on Alpine Linux.
 
 %environment
-    # This sets the default environment to 'myenv' when the container starts
-    export PATH=/usr/local/envs/myenv/bin:$PATH
+    export PATH=/opt/conda/envs/myenv/bin:$PATH
     export CONDA_DEFAULT_ENV=myenv
-
-%setup
-    # Create the .condarc file where the environments/channels from conda are specified
-    touch ${SINGULARITY_ROOTFS}/.condarc
+    conda activate myenv
 
 %post
-    # Update apt and install necessary packages
     apk update && apk add --no-cache \
         bash \
-        wget
+        wget \
 
-    wget -O /opt/environment.yml https://raw.githubusercontent.com/Qufst/create_apptainer.sif/main/environment.yml
-    #Installing Miniconda
-    wget -c https://repo.anaconda.com/miniconda/Miniconda3-py39_23.1.0-1-Linux-x86_64.sh
-    /bin/bash Miniconda3-py39_23.1.0-1-Linux-x86_64.sh -bfp /usr/local
-    #Conda configuration of channels from .condarc file
-    conda config --file /.condarc --add channels defaults
-    conda config --file /.condarc --add channels conda-forge
-    conda update conda
-    conda env create -n myenv -f opt/environment.yml
-    conda clean --tarballs --yes
+    wget -O opt/environment.yml https://raw.githubusercontent.com/Qufst/create_apptainer.sif/main/environment.yml
+    conda install -n base -c conda-forge mamba
+    mamba env create -n myenv -f /opt/environment.yml
+    conda clean -afy
+    apk del wget
 
 %runscript
     # This script will be executed when the container is run
