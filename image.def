@@ -1,11 +1,12 @@
 Bootstrap: docker
-From: drtools/alpine-miniconda
+From: alpine
 
 %help
     Container with Micromamba on Alpine Linux.
 
 %environment
-    export PATH=/opt/micromamba/bin:$PATH
+    . /opt/conda/etc/profile.d/conda.sh
+    conda activate myenv
 
 %post
     # Installer les dépendances
@@ -13,29 +14,18 @@ From: drtools/alpine-miniconda
         bash \
         curl \
         wget \
-        ca-certificates \
-        bzip2 \
-        libstdc++ \
-        git && \
-        rm -rf /var/cache/apk/*
 
     # Installer Micromamba
     wget -O opt/environment.yml https://raw.githubusercontent.com/Qufst/create_apptainer.sif/main/environment.yml
-    conda config --set ssl_verify true
-    conda update conda
+    wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh
+    bash Miniconda3-latest-Linux-x86_64.sh -b -f -p /opt/conda
+    rm Miniconda3-latest-Linux-x86_64.sh
+    . /opt/conda/etc/profile.d/conda.sh
+    conda activate
+    conda env create -n myenv -f environment.yml
+    conda update --all
 
-    conda install -y -c conda-forge micromamba --insecure
 
-    # Créer un environnement Micromamba et installer des paquets de base
-    micromamba create -y -n myenv -f opt/environment.yml
-    micromamba clean --all --yes
-
-%runscript
-    micromamba activate myenv
-    exec /bin/bash "$@"
-
-%startscript
-    exec /bin/bash
 
 
 
