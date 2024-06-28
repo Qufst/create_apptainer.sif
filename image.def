@@ -19,13 +19,7 @@ From: debian:9
     apt-get -y install \
         build-essential \
         wget \
-        bzip2 \
-        ca-certificates \
-        libglib2.0-0 \
-        libxext6 \
-        libsm6 \
-        libxrender1 \
-        git
+
     rm -rf /var/lib/apt/lists/*
     apt-get clean
 
