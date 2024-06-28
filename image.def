@@ -5,29 +5,20 @@ From: alpine
     Container with Micromamba on Alpine Linux.
 
 %environment
-    . /opt/conda/etc/profile.d/conda.sh
+    export PATH=/opt/miniconda/bin:${PATH}
     conda activate myenv
 
-%post
-    # Installer les dépendances
+%post -c /bin/bash
     apk update && apk add --no-cache \
         bash \
         curl \
         wget \
 
-    # Installer Micromamba
+    INSTALL_SCRIPT=Miniconda3-py38_4.9.2-Linux-x86_64.sh
     wget -O opt/environment.yml https://raw.githubusercontent.com/Qufst/create_apptainer.sif/main/environment.yml
-    wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh
-    chmod +x miniconda.sh
-    sha256sum miniconda.sh
-    df -h
-    rm -rf /opt/conda
-    mkdir -p /opt/conda
-    chmod -R 777 /opt/conda
-    ./miniconda.sh -b -p /opt/conda
-    rm Miniconda3-latest-Linux-x86_64.sh
-    /opt/conda/bin/conda init
-    conda activate
+    wget https://repo.anaconda.com/miniconda/${INSTALL_SCRIPT}
+    bash ${INSTALL_SCRIPT} -b -p /opt/miniconda3
+    rm ${INSTALL_SCRIPT}
     conda env create -n myenv -f environment.yml
     conda update --all
 
