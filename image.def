@@ -1,22 +1,36 @@
 Bootstrap: docker
-From: continuumio/miniconda3:4.10.3-alpine
+From: debian:9
 
 %help
     Container with conda on Alpine Linux.
 
 %environment
-    export PATH=/opt/conda/envs/myenv/bin:$PATH
-    export CONDA_DEFAULT_ENV=myenv
     conda activate myenv
 
 %post
-    apk update && apk add --no-cache \
-        bash \
-        wget \
+    apt-get update && apt-get -y upgrade
+    apt-get -y install \
+    build-essential \
+    wget \
+    bzip2 \
+    ca-certificates \
+    libglib2.0-0 \
+    libxext6 \
+    libsm6 \
+    libxrender1 \
+    git
+    rm -rf /var/lib/apt/lists/*
+    apt-get clean
 
-    wget -O opt/environment.yml https://raw.githubusercontent.com/Qufst/create_apptainer.sif/main/environment.yml
+    #Installing Miniconda
+    wget -c https://repo.anaconda.com/miniconda/Miniconda3-py39_23.1.0-1-Linux-x86_64.sh
+    /bin/bash Miniconda3-py39_23.1.0-1-Linux-x86_64.sh -bfp /usr/local
+    #Conda configuration of channels from .condarc file
+    conda config --file /.condarc --add channels defaults
+    conda config --file /.condarc --add channels conda-forge
+    conda update conda
     conda env create -n myenv -f opt/environment.yml
-    conda update --all
+    conda clean --tarballs --yes
 
 %runscript
     # This script will be executed when the container is run
