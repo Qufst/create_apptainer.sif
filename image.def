@@ -18,15 +18,14 @@ From: alpine:3.17
         libstdc++ \
         git && \
         rm -rf /var/cache/apk/*
-    mkdir -p /opt/micromamba/bin/
 
     # Installer Micromamba
     wget -O opt/environment.yml https://raw.githubusercontent.com/Qufst/create_apptainer.sif/main/environment.yml
     wget -O miniconda.sh https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh
-    ls -la
-    bash miniconda.sh -b -p /miniconda
+    mkdir -p /opt/miniconda
+    bash miniconda.sh -b -p /opt/miniconda
     rm miniconda.sh
-    export PATH=/miniconda/bin:$PATH
+    export PATH=/opt/miniconda/bin:$PATH
     conda install -y -c conda-forge micromamba
 
     # Créer un environnement Micromamba et installer des paquets de base
