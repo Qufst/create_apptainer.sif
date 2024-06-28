@@ -18,10 +18,11 @@ From: alpine:3.17
         libstdc++ \
         git && \
         rm -rf /var/cache/apk/*
+    mkdir -p /opt/micromamba/bin/
 
     # Installer Micromamba
     wget -O opt/environment.yml https://raw.githubusercontent.com/Qufst/create_apptainer.sif/main/environment.yml
-    curl -Ls https://micromamba.snakepit.net/api/micromamba/linux-64/latest | tar -xvj -C /opt/micromamba/bin/ --strip-components=1 bin/micromamba
+    curl -Ls https://micro.mamba.pm/install.sh | bash -s -- -b /opt/micromamba
 
     # Créer un environnement Micromamba et installer des paquets de base
     /opt/micromamba/bin/micromamba create -y -n myenv -f opt/environment.yml && \
