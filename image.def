@@ -15,13 +15,13 @@ From: continuumio/miniconda3:4.10.3-alpine
 
     wget -O opt/environment.yml https://raw.githubusercontent.com/Qufst/create_apptainer.sif/main/environment.yml
     conda install -n base -c conda-forge mamba
+    mamba init
     mamba env create -n myenv -f /opt/environment.yml
     conda clean -afy
     apk del wget
 
 %runscript
-    # This script will be executed when the container is run
-    mamba init
+    source /opt/conda/etc/profile.d/conda.sh
     mamba activate myenv
     exec "$@"
 
