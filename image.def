@@ -17,7 +17,6 @@ From: continuumio/miniconda3:4.10.3-alpine
     conda install -n base -c conda-forge mamba
     mamba init --system
     mamba env create -n myenv -f /opt/environment.yml
-    mamba activate myenv
     conda clean -afy
     apk del wget
 
