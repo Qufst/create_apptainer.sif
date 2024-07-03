@@ -20,7 +20,6 @@ From: continuumio/miniconda3:4.10.3-alpine
     apk del wget
 
 %runscript
-    eval "$(mamba shell hook --shell=bash)"
     export CONDA_PKGS_DIRS=./environment/pkgs
   
     recreate_environment=false
@@ -36,7 +35,8 @@ From: continuumio/miniconda3:4.10.3-alpine
     if "$recreate_environment"; then
       mamba -y env create --prefix ./environment --file environment.yml
     fi
-
+    mamba init --system
+    /home/runner/.bashrc
     mamba activate ./environment
     
     
