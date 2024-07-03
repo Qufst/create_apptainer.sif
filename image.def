@@ -21,12 +21,12 @@ From: continuumio/miniconda3:4.10.3-alpine
     conda clean --all
 
     # Configure l'activation de l'environnement
+    chmod +x /environment.sh
     echo ". /opt/conda/etc/profile.d/conda.sh" >> /environment.sh
     echo "conda activate $ENV_NAME" >> /environment.sh
     echo "export PATH=/opt/conda/envs/$ENV_NAME/bin:\$PATH" >> /environment.sh
 
 %runscript
-    # Source the environment configuration
     . /environment.sh
     exec "$@"
 
