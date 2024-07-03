@@ -1,22 +1,36 @@
 Bootstrap: docker
-From: continuumio/miniconda3
-   
+From: continuumio/miniconda3:4.10.3-alpine
+
+%help
+    Container with conda on Alpine Linux.
+
 %files
     environment.yml
-   
+
 %environment
-    export PATH="/opt/conda/envs/$ENV_NAME/bin:$PATH"
-    . /opt/conda/etc/profile.d/conda.sh
-    conda activate $ENV_NAME
-   
+    export ENV_NAME=myenv
+
 %post
-    echo ". /opt/conda/etc/profile.d/conda.sh" >> $APPTAINER_ENVIRONMENT
-    echo "conda activate myenv" >> $APPTAINER_ENVIRONMENT
-    echo "export PATH=/opt/conda/envs/$ENV_NAME/bin:\$PATH" >> $APPTAINER_ENVIRONMENT
-   
-    . /opt/conda/etc/profile.d/conda.sh
-    conda env create -f environment.yml -p /opt/conda/envs/myenv
+    ENV_NAME=myenv
+
+    # Installer Mamba
+    conda install -c conda-forge mamba -y
+
+    # Créer l'environnement conda avec Mamba
+    mamba env create -f /environment.yml -p /opt/conda/envs/$ENV_NAME
     conda clean --all
-   
-%runscript  
+
+    # Configure l'activation de l'environnement
+    echo ". /opt/conda/etc/profile.d/conda.sh" >> /environment.sh
+    echo "conda activate $ENV_NAME" >> /environment.sh
+    echo "export PATH=/opt/conda/envs/$ENV_NAME/bin:\$PATH" >> /environment.sh
+
+%runscript
+    # Source the environment configuration
+    . /environment.sh
     exec "$@"
+
+
+
+
+
