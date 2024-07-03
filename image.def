@@ -20,9 +20,24 @@ From: continuumio/miniconda3:4.10.3-alpine
     apk del wget
 
 %runscript
-    mamba init --system
-    mamba env create -n myenv -f /opt/environment.yml
-    mamba activate myenv
+    eval "$(mamba shell hook --shell=bash)"
+    export CONDA_PKGS_DIRS=./environment/pkgs
+  
+    recreate_environment=false
+    if [ ! -d "environment" ]; then
+      recreate_environment=true
+    else
+      if [ "environment.yml" -nt "environment" ]; then
+        echo "environment.yml is newer than environment: updating environment"
+        recreate_environment=true
+      fi
+    fi
+  
+    if "$recreate_environment"; then
+      mamba -y env create --prefix ./environment --file environment.yml
+    fi
+
+    mamba activate ./environment
     
     
     
