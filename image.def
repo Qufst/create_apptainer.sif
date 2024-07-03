@@ -5,15 +5,18 @@ From: continuumio/miniconda3
     environment.yml
    
 %environment
+    export PATH="/opt/conda/envs/$ENV_NAME/bin:$PATH"
+    . /opt/conda/etc/profile.d/conda.sh
+    conda activate $ENV_NAME
    
 %post
-    ENV_NAME=myenv
     echo ". /opt/conda/etc/profile.d/conda.sh" >> $APPTAINER_ENVIRONMENT
-    echo "conda activate $ENV_NAME" >> $APPTAINER_ENVIRONMENT
+    echo "conda activate myenv" >> $APPTAINER_ENVIRONMENT
+    echo "export PATH=/opt/conda/envs/$ENV_NAME/bin:\$PATH" >> $APPTAINER_ENVIRONMENT
    
     . /opt/conda/etc/profile.d/conda.sh
-    conda env create -f environment.yml -p /opt/conda/envs/$ENV_NAME
+    conda env create -f environment.yml -p /opt/conda/envs/myenv
     conda clean --all
    
-%runscript
+%runscript  
     exec "$@"
