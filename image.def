@@ -7,7 +7,7 @@ From: continuumio/miniconda3
 %environment
    
 %post
-    ENV_NAME=$(head -1 environment.yml | cut -d' ' -f2)
+    ENV_NAME=myenv
     echo ". /opt/conda/etc/profile.d/conda.sh" >> $APPTAINER_ENVIRONMENT
     echo "conda activate $ENV_NAME" >> $APPTAINER_ENVIRONMENT
    
