@@ -1,51 +1,19 @@
 Bootstrap: docker
-From: continuumio/miniconda3:4.10.3-alpine
-
-%help
-    Container with conda on Alpine Linux.
-
+From: continuumio/miniconda3
+   
+%files
+    environment.yml
+   
 %environment
-    export PATH=/opt/conda/envs/myenv/bin:$PATH
-    export CONDA_DEFAULT_ENV=myenv
-
+   
 %post
-    apk update && apk add --no-cache \
-        bash \
-        wget \
-
-    wget -O opt/environment.yml https://raw.githubusercontent.com/Qufst/create_apptainer.sif/main/environment.yml
-    ln -sf /bin/bash /bin/sh
-    conda install -n base -c conda-forge mamba 
-    conda clean -afy
-    apk del wget
-
+    ENV_NAME=$(head -1 environment.yml | cut -d' ' -f2)
+    echo ". /opt/conda/etc/profile.d/conda.sh" >> $APPTAINER_ENVIRONMENT
+    echo "conda activate $ENV_NAME" >> $APPTAINER_ENVIRONMENT
+   
+    . /opt/conda/etc/profile.d/conda.sh
+    conda env create -f environment.yml -p /opt/conda/envs/$ENV_NAME
+    conda clean --all
+   
 %runscript
-    export CONDA_PKGS_DIRS=./environment/pkgs
-  
-    recreate_environment=false
-    if [ ! -d "environment" ]; then
-      recreate_environment=true
-    else
-      if [ "environment.yml" -nt "environment" ]; then
-        echo "environment.yml is newer than environment: updating environment"
-        recreate_environment=true
-      fi
-    fi
-  
-    if "$recreate_environment"; then
-      mamba -y env create --prefix ./environment --file environment.yml
-    fi
-    mamba init --system
-    /home/runner/.bashrc
-    mamba activate ./environment
-    
-    
-    
-    
-    $@
-
-
-
-
-
-
+    exec "$@"
