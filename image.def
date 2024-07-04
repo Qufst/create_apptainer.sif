@@ -7,9 +7,6 @@ From: continuumio/miniconda3:4.10.3-alpine
 %files
     environment.yml
 
-%environment
-    export ENV_NAME=myenv
-
 %post
     ENV_NAME=myenv
 
@@ -18,16 +15,20 @@ From: continuumio/miniconda3:4.10.3-alpine
 
     # Créer l'environnement conda avec Mamba
     mamba env create -f /environment.yml -p /opt/conda/envs/$ENV_NAME
-    conda clean --all
+    conda clean --all --yes
+    export MAMBA_ROOT_PREFIX=find / --name mamba
+    eval "$(mamba shell hook -s posix)"
+    mamba activate
+    mamba install -y -q -f environment.yml
+    mamba clean -all --yes
 
-    # Configure l'activation de l'environnement
-    echo ". /opt/conda/etc/profile.d/conda.sh" >> /environment.sh
-    echo "conda activate $ENV_NAME" >> /environment.sh
-    echo "export PATH=/opt/conda/envs/$ENV_NAME/bin:\$PATH" >> /environment.sh
-    chmod +x /environment.sh
+%environment
+    export MAMBA_ROOT_PREFIX=find / --name mamba
+    eval "$(mamba shell hook -s posix)"
+    mamba env create -f /environment.yml -p /opt/conda/envs/myenv
 
 %runscript
-    . /environment.sh
+    python
     exec "$@"
 
 
