@@ -16,14 +16,16 @@ From: continuumio/miniconda3:4.10.3-alpine
     # Créer l'environnement conda avec Mamba
     mamba env create -f /environment.yml -p /opt/conda/envs/$ENV_NAME
     conda clean --all --yes
-    export MAMBA_ROOT_PREFIX=find -name / mamba
+    find -name / mamba
+    export MAMBA_ROOT_PREFIX=
     eval "$(mamba shell hook -s posix)"
     mamba activate
     mamba install -y -q -f environment.yml
     mamba clean -all --yes
 
 %environment
-    export MAMBA_ROOT_PREFIX=find -name / mamba
+    find -name / mamba
+    export MAMBA_ROOT_PREFIX=
     eval "$(mamba shell hook -s posix)"
     mamba env create -f /environment.yml -p /opt/conda/envs/myenv
 
