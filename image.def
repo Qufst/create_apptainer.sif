@@ -9,14 +9,16 @@ From: mambaorg/micromamba:alpine
 
 %post
     eval "$(micromamba shell hook -s posix)"
-    micromamba activate 
+    micromamba activate base
 
-    micromamba install -y -q -f /environment.yml   
+    micromamba create -y -f /environment.yml -n myenv
     micromamba clean --all --yes
 
+    echo 'eval "$(micromamba shell hook -s posix)"' >> /etc/profile
+    echo 'micromamba activate myenv' >> /etc/profile
 %environment
     eval "$(micromamba shell hook -s posix)"
-    micromamba activate
+    micromamba activate myenv
 
 %runscript
     python
