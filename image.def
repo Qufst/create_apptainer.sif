@@ -1,33 +1,24 @@
 Bootstrap: docker
-From: continuumio/miniconda3:4.10.3-alpine
+From: mambaorg/micromamba:alpine
 
 %help
-    Container with conda on Alpine Linux.
+    Container with micromamba on Alpine Linux.
 
 %files
-    environment.yml
+    environment.yml /environment.yml
 
 %post
-    ENV_NAME=myenv
+    export MAMBA_ROOT_PREFIX=/opt/env/micromamba
+    eval "$(micromamba shell hook -s posix)"
+    micromamba activate 
 
-    # Installer Mamba
-    conda install -c conda-forge mamba -y
-
-    # Créer l'environnement conda avec Mamba
-    mamba env create -f /environment.yml -p /opt/conda/envs/$ENV_NAME
-    conda clean --all --yes
-    find -name / mamba
-    export MAMBA_ROOT_PREFIX=
-    eval "$(mamba shell hook -s posix)"
-    mamba activate
-    mamba install -y -q -f environment.yml
-    mamba clean -all --yes
+    micromamba install -y -q -f /environment.yml   
+    micromamba clean --all --yes
 
 %environment
-    find -name / mamba
-    export MAMBA_ROOT_PREFIX=
-    eval "$(mamba shell hook -s posix)"
-    mamba env create -f /environment.yml -p /opt/conda/envs/myenv
+    export MAMBA_ROOT_PREFIX=/opt/env/micromamba
+    eval "$(micromamba shell hook -s posix)"
+    micromamba activate
 
 %runscript
     python
