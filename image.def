@@ -8,7 +8,6 @@ From: mambaorg/micromamba:alpine
     environment.yml /environment.yml
 
 %post
-    export MAMBA_ROOT_PREFIX=/opt/env/micromamba
     eval "$(micromamba shell hook -s posix)"
     micromamba activate 
 
@@ -16,7 +15,6 @@ From: mambaorg/micromamba:alpine
     micromamba clean --all --yes
 
 %environment
-    export MAMBA_ROOT_PREFIX=/opt/env/micromamba
     eval "$(micromamba shell hook -s posix)"
     micromamba activate
 
