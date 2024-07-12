@@ -12,7 +12,7 @@ From: mambaorg/micromamba:alpine
     micromamba activate base
 
     micromamba create -y -f /environment.yml -n myenv
-    micromamba clean --all --yes
+
 
     echo 'eval "$(micromamba shell hook -s posix)"' >> /etc/profile
     echo 'micromamba activate myenv' >> /etc/profile
@@ -22,6 +22,7 @@ From: mambaorg/micromamba:alpine
 
 %runscript
     python
+    myenv
     exec "$@"
 
 
