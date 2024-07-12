@@ -21,7 +21,7 @@ jobs:
 
       - name: Create sif with apptainer
         run: |
-          apptainer build --fakeroot --writable image.sif image.def
+          apptainer build --fakeroot image.sif image.def
 
       - name: Upload .sif in an artifact
         uses: actions/upload-artifact@v3
