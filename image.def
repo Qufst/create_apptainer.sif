@@ -19,10 +19,9 @@ From: mambaorg/micromamba:alpine
 %environment
     eval "$(micromamba shell hook -s posix)"
     micromamba activate myenv
-
+ 
 %runscript
     python
-    myenv
     exec "$@"
 
 
