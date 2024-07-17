@@ -16,10 +16,19 @@ From: mambaorg/micromamba:alpine
 
     echo 'eval "$(micromamba shell hook -s posix)"' >> /etc/profile
     echo 'micromamba activate myenv' >> /etc/profile
+
+    micromamba install -y wget tar
+
+    QUARTO_VERSION=1.5.54
+    mkdir -p /opt/quarto
+    wget -qO- https://github.com/quarto-dev/quarto-cli/releases/download/v${QUARTO_VERSION}/quarto-${QUARTO_VERSION}-linux-amd64.tar.gz | tar -xz -C /opt/quarto --strip-components=1
+
+    # Add Quarto to PATH
+    echo 'export PATH=/opt/quarto/bin:$PATH' >> /etc/profile
 %environment
     eval "$(micromamba shell hook -s posix)"
     micromamba activate myenv
- 
+    export PATH=/opt/quarto/bin:$PATH
 %runscript
     python
     exec "$@"
