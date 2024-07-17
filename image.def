@@ -17,7 +17,7 @@ From: mambaorg/micromamba:alpine
     echo 'eval "$(micromamba shell hook -s posix)"' >> /etc/profile
     echo 'micromamba activate myenv' >> /etc/profile
 
-    micromamba install -y wget tar
+    apk add --no-cache wget tar
 
     QUARTO_VERSION=1.5.54
     mkdir -p /opt/quarto
