@@ -18,7 +18,7 @@ From: mambaorg/micromamba:alpine
     echo 'eval "$(micromamba shell hook -s posix)"' >> /etc/profile
     echo 'micromamba activate myenv' >> /etc/profile
 
-    apk add --no-cache wget tar gdb make gcc g++ cmake file
+    apk add --no-cache git wget tar gdb make gcc g++ cmake file npm
 
     cd /opt
     git clone https://github.com/quarto-dev/quarto-cli.git
