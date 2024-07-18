@@ -25,6 +25,15 @@ From: mambaorg/micromamba:alpine
 
     # Add Quarto to PATH
     echo 'export PATH=/opt/quarto/bin:$PATH' >> /etc/profile
+
+    # Install Deno
+    DENO_VERSION=v1.27.1
+    wget -qO- https://github.com/denoland/deno/releases/download/${DENO_VERSION}/deno-x86_64-unknown-linux-gnu.zip -O deno.zip
+    unzip deno.zip -d /usr/local/bin
+    rm deno.zip
+
+    # Add Deno to PATH
+    echo 'export PATH=/usr/local/bin:$PATH' >> /etc/profile
 %environment
     eval "$(micromamba shell hook -s posix)"
     micromamba activate myenv
