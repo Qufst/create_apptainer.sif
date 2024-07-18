@@ -1,5 +1,5 @@
 Bootstrap: docker
-From: mambaorg/micromamba
+From: mambaorg/micromamba:latest
 
 %help
     Container with micromamba on Alpine Linux.
