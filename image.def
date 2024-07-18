@@ -19,10 +19,6 @@ From: mambaorg/micromamba:alpine
 
     apk add --no-cache wget tar gdb file
 
-    QUARTO_VERSION=1.5.54
-    mkdir -p /opt/quarto
-    wget -qO- https://github.com/quarto-dev/quarto-cli/releases/download/v${QUARTO_VERSION}/quarto-${QUARTO_VERSION}-linux-amd64.tar.gz | tar -xz -C /opt/quarto --strip-components=1
-
     # Install Deno
     DENO_VERSION=v1.27.1
     wget -qO- https://github.com/denoland/deno/releases/download/${DENO_VERSION}/deno-x86_64-unknown-linux-gnu.zip -O deno.zip
@@ -30,6 +26,10 @@ From: mambaorg/micromamba:alpine
     chmod +x /opt/quarto
     chmod +x /opt/deno
     rm deno.zip
+    
+    QUARTO_VERSION=1.5.54
+    mkdir -p /opt/quarto
+    wget -qO- https://github.com/quarto-dev/quarto-cli/releases/download/v${QUARTO_VERSION}/quarto-${QUARTO_VERSION}-linux-amd64.tar.gz | tar -xz -C /opt/quarto --strip-components=1
 
     # Add Quarto to PATH
     echo 'export PATH=/opt/quarto/bin:$PATH' >> /etc/profile
