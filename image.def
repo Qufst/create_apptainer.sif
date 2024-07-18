@@ -20,6 +20,7 @@ From: mambaorg/micromamba:alpine
 
     apk add --no-cache git wget tar gdb make gcc g++ cmake file curl
 
+    curl -fsSL https://deno.land/x/install/install.sh | sh
     cd /opt
     git clone https://github.com/quarto-dev/quarto-cli.git
     cd quarto-cli
