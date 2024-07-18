@@ -23,12 +23,9 @@ From: mambaorg/micromamba:alpine
     cd /opt
     git clone https://github.com/quarto-dev/quarto-cli.git
     cd quarto-cli
-    npm install
-    npm run build
+    ./configure.sh
 
-    # Move the built binary to /opt/quarto
-    mkdir -p /opt/quarto/bin
-    cp ./dist/quarto /opt/quarto/bin/quarto
+    ln -s /opt/quarto-cli/package/dist/bin/quarto /opt/quarto/bin/quarto
 
     # Add Quarto to PATH
     echo 'export PATH=/opt/quarto/bin:$PATH' >> /etc/profile
