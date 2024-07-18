@@ -17,18 +17,24 @@ From: mambaorg/micromamba:alpine
     echo 'eval "$(micromamba shell hook -s posix)"' >> /etc/profile
     echo 'micromamba activate myenv' >> /etc/profile
 
-    apk add --no-cache wget tar gdb file
-
-    # Install Deno
-    DENO_VERSION=v1.27.1
-    wget -qO- https://github.com/denoland/deno/releases/download/${DENO_VERSION}/deno-x86_64-unknown-linux-gnu.zip -O deno.zip
-    unzip deno.zip -d /opt/
-    chmod +x /opt/deno
-    rm deno.zip
+    apk add --no-cache wget tar gdb file curl
     
-    QUARTO_VERSION=1.5.54
-    mkdir -p /opt/quarto
-    wget -qO- https://github.com/quarto-dev/quarto-cli/releases/download/v${QUARTO_VERSION}/quarto-${QUARTO_VERSION}-linux-amd64.tar.gz | tar -xz -C /opt/quarto --strip-components=1
+    ALPINE_GLIBC_BASE_URL="https://github.com/sgerrand/alpine-pkg-glibc/releases/download"
+    ALPINE_GLIBC_VERSION="2.34-r0"
+    wget -q -O /etc/apk/keys/sgerrand.rsa.pub https://alpine-pkgs.sgerrand.com/sgerrand.rsa.pub
+    wget -q ${ALPINE_GLIBC_BASE_URL}/${ALPINE_GLIBC_VERSION}/glibc-${ALPINE_GLIBC_VERSION}.apk
+    wget -q ${ALPINE_GLIBC_BASE_URL}/${ALPINE_GLIBC_VERSION}/glibc-bin-${ALPINE_GLIBC_VERSION}.apk
+    wget -q ${ALPINE_GLIBC_BASE_URL}/${ALPINE_GLIBC_VERSION}/glibc-i18n-${ALPINE_GLIBC_VERSION}.apk
+    apk add glibc-${ALPINE_GLIBC_VERSION}.apk glibc-bin-${ALPINE_GLIBC_VERSION}.apk glibc-i18n-${ALPINE_GLIBC_VERSION}.apk
+    /usr/glibc-compat/bin/localedef -i en_US -f UTF-8 en_US.UTF-8
+    echo "export LANG=en_US.UTF-8" > /etc/profile.d/locale.sh
+
+    # Télécharger et installer Quarto
+    QUARTO_VERSION="1.3.340"
+    wget https://github.com/quarto-dev/quarto-cli/releases/download/v${QUARTO_VERSION}/quarto-${QUARTO_VERSION}-linux-amd64.tar.gz
+    tar -xzf quarto-${QUARTO_VERSION}-linux-amd64.tar.gz
+    cp -r quarto-${QUARTO_VERSION}-linux-amd64/* /opt/quarto/
+    rm -rf quarto-${QUARTO_VERSION}-linux-amd64*
 
     # Add Quarto to PATH
     echo 'export PATH=/opt/quarto/bin:$PATH' >> /etc/profile
