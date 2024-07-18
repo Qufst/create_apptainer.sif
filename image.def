@@ -17,11 +17,18 @@ From: mambaorg/micromamba:alpine
     echo 'eval "$(micromamba shell hook -s posix)"' >> /etc/profile
     echo 'micromamba activate myenv' >> /etc/profile
 
-    apk add --no-cache wget tar gdb
+    apk add --no-cache wget tar gdb make gcc g++ cmake file
+    micromamba install -y nodejs
 
-    QUARTO_VERSION=1.5.54
-    mkdir -p /opt/quarto
-    wget -qO- https://github.com/quarto-dev/quarto-cli/releases/download/v${QUARTO_VERSION}/quarto-${QUARTO_VERSION}-linux-amd64.tar.gz | tar -xz -C /opt/quarto --strip-components=1
+    cd /opt
+    git clone https://github.com/quarto-dev/quarto-cli.git
+    cd quarto-cli
+    npm install
+    npm run build
+
+    # Move the built binary to /opt/quarto
+    mkdir -p /opt/quarto/bin
+    cp ./dist/quarto /opt/quarto/bin/quarto
 
     # Add Quarto to PATH
     echo 'export PATH=/opt/quarto/bin:$PATH' >> /etc/profile
