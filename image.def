@@ -1,5 +1,5 @@
 Bootstrap: docker
-From: mambaorg/micromamba:1.4.6-bionic
+From: mambaorg/micromamba:1.4.6-jammy
 
 %help
     Container with micromamba on Linux.
