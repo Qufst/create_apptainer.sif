@@ -23,7 +23,7 @@ From: mambaorg/micromamba:1.4.6-jammy
     mkdir -p /opt/quarto
     wget -qO- https://github.com/quarto-dev/quarto-cli/releases/download/v${QUARTO_VERSION}/quarto-${QUARTO_VERSION}-linux-amd64.tar.gz | tar -xz -C /opt/quarto --strip-components=1
 
-    quarto add --no-prompt computorg/computo-quarto-extension
+    /opt/quarto/bin/quarto add --no-prompt computorg/computo-quarto-extension
     # Add Quarto to PATH
     echo 'export PATH=/opt/quarto/bin:$PATH' >> /etc/profile
 %environment
