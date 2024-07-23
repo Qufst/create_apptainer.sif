@@ -10,7 +10,11 @@ From: r-base:4.3.2
         wget \
         tar \
         file \
-        git
+        git \
+        python3-pip
+
+    # Install Jupyter
+    pip3 install jupyter
 
     # Install R packages
     R --no-echo -e 'install.packages("devtools", repos="https://cloud.r-project.org/")'
