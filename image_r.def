@@ -1,5 +1,5 @@
 BootStrap: docker
-From: r-base:4.2.2
+From: r-base:4.3.2
 
 %post
     # Update the package list and install required system dependencies
@@ -7,8 +7,6 @@ From: r-base:4.2.2
         libcurl4-openssl-dev \
         libssl-dev \
         libxml2-dev \
-        libudunits2-dev \
-        libgdal-dev \
         wget \
         tar \
         file \
@@ -17,9 +15,6 @@ From: r-base:4.2.2
     # Install R packages
     R --no-echo -e 'install.packages("devtools", repos="https://cloud.r-project.org/")'
     
-    
-    # Run any additional commands required for the 'fastai' installation
-    R --no-echo -e 'fastai::install_fastai()'
 
     QUARTO_VERSION=1.5.54
     mkdir -p /opt/quarto
