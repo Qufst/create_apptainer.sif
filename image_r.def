@@ -8,16 +8,26 @@ From: r-base:4.2.2
         libssl-dev \
         libxml2-dev \
         libudunits2-dev \
-        libgdal-dev
+        libgdal-dev \
+        wget \
+        tar \
+        file \
+        git
 
     # Install R packages
     R --no-echo -e 'install.packages("devtools", repos="https://cloud.r-project.org/")'
     
-    # Install the 'fastai' package from GitHub
-    R --no-echo -e 'devtools::install_github("microsoft/fastai")'
     
     # Run any additional commands required for the 'fastai' installation
     R --no-echo -e 'fastai::install_fastai()'
+
+    QUARTO_VERSION=1.5.54
+    mkdir -p /opt/quarto
+    wget -qO- https://github.com/quarto-dev/quarto-cli/releases/download/v${QUARTO_VERSION}/quarto-${QUARTO_VERSION}-linux-amd64.tar.gz | tar -xz -C /opt/quarto --strip-components=1
+
+    /opt/quarto/bin/quarto add --no-prompt computorg/computo-quarto-extension
+    # Add Quarto to PATH
+    echo 'export PATH=/opt/quarto/bin:$PATH' >> /etc/profile
 
 %runscript
     exec R "$@"
