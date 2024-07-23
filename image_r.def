@@ -1,0 +1,130 @@
+BootStrap: localimage
+From: /fs1/software/containers/rocky_9/rocky9.sif
+
+%runscript
+exec "$@"
+
+%environment
+export CPATH=$CPATH:/usr/include/openmpi-x86_64
+export PKG_CONFIG_PATH=/usr/local/lib/pkgconfig
+export LD_LIBRARY_PATH=/usr/local/lib:/usr/local/cuda/lib64:$LD_LIBRARY_PATH
+export http_proxy="http://192.168.211.16:3128/"
+export PATH=/usr/lib/rstudio-server/bin:/usr/local/cuda/bin:${PATH}
+export NVIDIA_CUDNN="/usr"
+
+%post
+# Setup Environment
+export CPATH=$CPATH:/usr/include/openmpi-x86_64
+export PKG_CONFIG_PATH=/usr/local/lib/pkgconfig
+export LD_LIBRARY_PATH=/usr/local/lib:/usr/local/cuda/lib64:$LD_LIBRARY_PATH
+export http_proxy="http://192.168.211.16:3128/"
+export PATH=/usr/lib/rstudio-server/bin:/usr/local/cuda/bin:${PATH}
+export NVIDIA_CUDNN="/usr"
+
+# Set Nvida Vars
+rocky_os="9"
+cuda_ver="11.8"
+cuda_dash="11-8"
+cudnn_ver="8.8.1.3"
+cudnn_ver_short="8.8.1"
+
+# Install Additional Repos
+cp -f /fs1/software/containers/rocky_${rocky_os}/nvidia/cuda/localrepo-cuda${cuda_ver}.repo /etc/yum.repos.d
+cp -f /fs1/software/containers/rocky_${rocky_os}/nvidia/cudnn/localrepo-cudnn${cudnn_ver}-cuda${cuda_ver}.repo /etc/yum.repos.d
+
+# Install Known Required Dev Tools
+dnf install --refresh -y \
+        "@Development Tools" \
+        "@Scientific Support" \
+        ca-certificates \
+        cuda-toolkit-${cuda_dash} \
+        curl-devel \
+        fontconfig-devel \
+        libcudnn8 \
+        libcudnn8-devel \
+        libgit2-devel \
+        libxml2-devel \
+        llvm llvm-devel \
+        llvm-static \
+        llvm-toolset \
+        mariadb-connector-c-devel \
+        opencv \
+        opencv-devel \
+        openssl-devel \
+        python3-devel \
+        python3-pip \
+        python3-wheel \
+        wget
+
+# Install Additional Common Packages Used By R Packages
+## https://clint.id.au/?p=1428
+dnf module enable -y nodejs:20
+dnf install -y wget nodejs nodejs-devel npm openblas java-1.8.0-openjdk-devel zlib-devel libicu-devel libpng-devel libcurl-devel libxml2-devel openssl-devel openmpi-devel netcdf4-python3 netcdf-devel netcdf proj-devel gdal-devel monitorix gnuplot ImageMagick librsvg2-devel libsodium-devel libwebp-devel cairo-devel hunspell-devel openssl-devel poppler-cpp-devel protobuf-devel mariadb-devel redland-devel cyrus-sasl-devel libtiff-devel tcl-devel tk-devel xauth mesa-libGLU-devel glpk-devel libXt-devel gsl-devel fftw-devel bzip2-devel geos-devel gtk2-devel gtk3-devel libjpeg-turbo-devel blas-devel lapack-devel mpfr-devel unixODBC-devel libsndfile-devel udunits2-devel postgresql-devel libRmath-devel qt5-devel libdb-devel octave-devel hiredis-devel poppler-glib-devel boost-devel czmq-devel ImageMagick-c++-devel file-devel opencl-headers sqlite-devel
+
+# Handle OpenMPI ldconfig
+echo "/usr/lib64/openmpi/lib" > /etc/ld.so.conf.d/openmpi.conf
+ldconfig
+
+# Install Code-Server
+curl -fsSL https://code-server.dev/install.sh | sh
+
+# Setup: Control Variables
+DISTRO="el9"
+R_VERSION="4.2.2"
+R_SVER="$(echo $R_VERSION | cut -d '.' -f 1,2 )"
+RSTUDIO_VERSION="2023.12.0-369"
+
+# R: Install R (https://docs.rstudio.com/resources/install-r/)
+curl -O https://cdn.rstudio.com/r/rhel-9/pkgs/R-${R_VERSION}-1-1.x86_64.rpm
+dnf install -y R-${R_VERSION}-1-1.x86_64.rpm
+rm -f R-${R_VERSION}-1-1.x86_64.rpm
+ln -s /opt/R/${R_VERSION}/bin/R /usr/local/bin/R
+ln -s /opt/R/${R_VERSION}/bin/Rscript /usr/local/bin/Rscript
+
+# RStudio: Install R Studio Server
+curl -O https://download2.rstudio.org/server/rhel9/x86_64/rstudio-server-rhel-${RSTUDIO_VERSION}-x86_64.rpm
+dnf install -y rstudio-server-rhel-${RSTUDIO_VERSION}-x86_64.rpm
+rm -f rstudio-server-rhel-${RSTUDIO_VERSION}-x86_64.rpm
+
+# Python: Install Python Packages for Jupyter, R, and VSCode
+python3 -m pip install --upgrade \
+        basemap \
+        ipykernel \
+        ipywidgets \
+        jupyterlab \
+        jupyterlab-pygments \
+        jupyterlab-widgets \
+        matplotlib \
+        notebook \
+        numpy \
+        opencv-contrib-python \
+        opencv-python \
+        pandas \
+        pyqt5 \
+        qtconsole \
+        radian
+
+# R: Site Profile - Add a default CRAN mirror
+echo "options(repos = c(CRAN = 'https://cran.rstudio.com/'), download.file.method = 'libcurl')" >> /opt/R/${R_VERSION}/lib/R/etc/Rprofile.site
+
+# R: Site ENV - Add Timezone
+echo "TZ='$TZ'" >> /opt/R/${R_VERSION}/lib/R/etc/Renviron
+
+# R: Site ENV - Adjust Platform and Libs
+sed -i "/^R_PLATFORM=/ c\R_PLATFORM=\${R_PLATFORM-'$DISTRO-x86_64-apptainer'}" /opt/R/${R_VERSION}/lib/R/etc/Renviron
+sed -i "/^R_LIBS_USER=/ c\R_LIBS_USER=\${R_LIBS_USER-'~/R/$DISTRO-x86_64-apptainer-library/$R_SVER'}" /opt/R/${R_VERSION}/lib/R/etc/Renviron
+
+# R: Site ENV - Add Aditional Custom Vars
+echo "DOWNLOAD_STATIC_LIBV8='1'" >> /opt/R/${R_VERSION}/lib/R/etc/Renviron
+
+# R: Install Additional R Packages
+R -e "install.packages(c('devtools', 'tidyverse', 'V8', 'rmarkdown', 'distill','IRkernel', 'languageserver', 'lintr', 'httpgd', 'remotes', 'BiocManager'), dependencies = TRUE)"
+R -e "remotes::install_github('nx10/unigd')"
+#devtools::install_github("ManuelHentschel/vscDebugger")
+R -e "IRkernel::installspec(user = FALSE)"
+R -e "fastai::install_fastai()"
+
+# Cleanup Temporary Files
+dnf clean all
+rm -rf /var/cache/dnf/*
+python3 -m pip cache purge
