@@ -12,13 +12,14 @@ From: r-base:4.3.2
         file \
         git \
         python3-venv
+        libffi-dev
 
     # Create and activate a virtual environment
     python3 -m venv /opt/venv
     . /opt/venv/bin/activate
 
-    # Install Jupyter in the virtual environment
-    pip install jupyter
+    # Install Jupyter and pyyaml in the virtual environment
+    /opt/venv/bin/pip install jupyter pyyaml
 
     # Install R packages
     R --no-echo -e 'install.packages("devtools", repos="https://cloud.r-project.org/")'
