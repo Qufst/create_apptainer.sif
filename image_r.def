@@ -11,10 +11,14 @@ From: r-base:4.3.2
         tar \
         file \
         git \
-        python3-pip
+        python3-venv
 
-    # Install Jupyter
-    pip3 install jupyter
+    # Create and activate a virtual environment
+    python3 -m venv /opt/venv
+    . /opt/venv/bin/activate
+
+    # Install Jupyter in the virtual environment
+    pip install jupyter
 
     # Install R packages
     R --no-echo -e 'install.packages("devtools", repos="https://cloud.r-project.org/")'
