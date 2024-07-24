@@ -1,6 +1,9 @@
 Bootstrap: docker
 From: rocker/r-ver:4.4.0
 
+%files
+    renv.lock /home/renv.lock
+
 %post
     # Mettre à jour et installer les dépendances système
     apt-get update && apt-get install -y \
@@ -26,6 +29,10 @@ From: rocker/r-ver:4.4.0
 
     # Installer renv
     R -e "install.packages('renv', repos='https://cloud.r-project.org/')"
+
+    # Restaurer les dépendances R avec renv
+    cp /home/renv.lock /root/renv.lock
+    R -e "renv::restore(lockfile = '/root/renv.lock')"
 
     # Installer Jupyter
     pip3 install notebook
