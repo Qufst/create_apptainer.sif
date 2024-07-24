@@ -14,20 +14,6 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v4 
-        
-      - name: Install R
-        uses: r-lib/actions/setup-r@v2
-        with:
-          r-version: '4.4.0'
-
-      - name: Install system dependencies for some R packages
-        run: |
-          sudo apt install libcurl4-openssl-dev
-
-      - name: Install R Dependencies with renv
-        uses: r-lib/actions/setup-renv@v2
-        with:
-          cache-version: 1
 
       - uses: eWaterCycle/setup-apptainer@v2
         with:
