@@ -35,7 +35,7 @@ jobs:
 
       - name: Find renv.lock
         run: |
-          find / -name renv.lock
+          cat renv.lock
 
       - name: Create sif with apptainer
         run: |
