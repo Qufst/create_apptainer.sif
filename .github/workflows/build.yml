@@ -29,6 +29,10 @@ jobs:
         with:
           cache-version: 1
 
+      - name: Find renv.lock
+        run: |
+          find / -name renv.lock
+
       - name: Create sif with apptainer
         run: |
           apptainer build --fakeroot image_r.sif image_r.def
