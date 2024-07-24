@@ -32,7 +32,7 @@ From: rocker/r-ver:4.4.0
 
     # Restaurer les dépendances R avec renv
     cp /home/renv.lock /root/renv.lock
-    R -e "renv::restore(lockfile = '/root/renv.lock')"
+    Rscript -e "renv::restore(lockfile = '/root/renv.lock')"
 
     # Installer Jupyter
     pip3 install notebook
