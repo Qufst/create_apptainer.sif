@@ -22,9 +22,11 @@ From: ubuntu:22.04
         libpng-dev \
         zlib1g-dev
 
-    # Ajouter le dépôt CRAN et installer R
-    curl -fsSL https://cloud.r-project.org/bin/linux/ubuntu/marutter_pubkey.asc | gpg --dearmor -o /usr/share/keyrings/cran-archive-keyring.gpg
-    add-apt-repository "deb [signed-by=/usr/share/keyrings/cran-archive-keyring.gpg] https://cloud.r-project.org/bin/linux/ubuntu $(lsb_release -cs)-cran40/"
+    # Ajouter la clé GPG et le dépôt CRAN
+    curl -fsSL https://cloud.r-project.org/bin/linux/ubuntu/marutter_pubkey.asc | apt-key add -
+    echo "deb https://cloud.r-project.org/bin/linux/ubuntu $(lsb_release -cs)-cran40/" > /etc/apt/sources.list.d/cran.list
+    
+    # Mettre à jour et installer R
     apt-get update && apt-get install -y r-base=4.4.0-1.2004.0
 
     # Installer renv
