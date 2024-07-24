@@ -11,21 +11,21 @@
   "Packages": {
     "ggplot2": {
       "Package": "ggplot2",
-      "Version": "3.3.5",
+      "Version": "*",
       "Source": "Repository",
       "Repository": "CRAN",
       "Hash": "a1b2c3d4"
     },
     "dplyr": {
       "Package": "dplyr",
-      "Version": "1.0.7",
+      "Version": "*",
       "Source": "Repository",
       "Repository": "CRAN",
       "Hash": "e5f6g7h8"
     },
     "tidyr": {
       "Package": "tidyr",
-      "Version": "1.1.4",
+      "Version": "*",
       "Source": "Repository",
       "Repository": "CRAN",
       "Hash": "i9j0k1l2"
