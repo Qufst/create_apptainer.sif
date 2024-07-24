@@ -21,7 +21,8 @@ From: rocker/r-ver:4.4.0
         libtiff5-dev \
         libpng-dev \
         zlib1g-dev \
-        python3-pip
+        python3-pip \
+        wget
 
     # Installer renv
     R -e "install.packages('renv', repos='https://cloud.r-project.org/')"
