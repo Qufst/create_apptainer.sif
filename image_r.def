@@ -24,6 +24,7 @@ From: rocker/r-ver:4.4.0
         libtiff5-dev \
         libpng-dev \
         zlib1g-dev \
+        python3-pip \
         wget
 
     # Créer le répertoire de cache renv avec les bonnes permissions
@@ -36,6 +37,9 @@ From: rocker/r-ver:4.4.0
     # Copier le fichier renv.lock et restaurer les dépendances R avec renv
     cp /home/renv.lock /root/renv.lock
     R -e "renv::restore(lockfile = '/root/renv.lock')"
+
+    # Installer Jupyter
+    pip3 install notebook
 
     # Installer Quarto
     QUARTO_VERSION=1.5.54
@@ -58,4 +62,4 @@ From: rocker/r-ver:4.4.0
     export PATH=/opt/quarto/bin:$PATH
 
 %runscript
-    exec R
+    exec "$@"
