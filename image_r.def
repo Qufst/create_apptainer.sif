@@ -37,7 +37,9 @@ From: rocker/r-ver:4.4.0
     wget -qO- https://github.com/quarto-dev/quarto-cli/releases/download/v${QUARTO_VERSION}/quarto-${QUARTO_VERSION}-linux-amd64.tar.gz | tar -xz -C /opt/quarto --strip-components=1
 
     # Ajouter l'extension Quarto
-    /opt/quarto/bin/quarto add --no-prompt computorg/computo-quarto-extension
+    export PATH=/opt/quarto/bin:$PATH
+    quarto add --no-prompt computorg/computo-quarto-extension
+    quarto list extensions
 
     # Ajouter Quarto au PATH
     echo 'export PATH=/opt/quarto/bin:$PATH' >> /etc/profile
