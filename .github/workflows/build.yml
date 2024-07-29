@@ -21,7 +21,8 @@ jobs:
 
       - name: Create sif with apptainer
         run: |
-          apptainer build --sandbox temp_sandbox image_quarto.def
+          apptainer build --fakeroot image_quarto.sif image_quarto.def
+          apptainer build --sandbox temp_sandbox image_quarto.sif
 
       - name: chmod
         run: chmod -R 755 temp_sandbox
