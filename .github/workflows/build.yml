@@ -27,6 +27,6 @@ jobs:
         uses: actions/upload-artifact@v3
         with:
           name: apptainer-image
-          path: image_r.sif
+          path: image_quarto.sif
         
 
