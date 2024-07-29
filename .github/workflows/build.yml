@@ -19,13 +19,9 @@ jobs:
         with:
           apptainer-version: 1.3.2
 
-      - name: Find renv.lock
-        run: |
-          cat renv.lock
-
       - name: Create sif with apptainer
         run: |
-          apptainer build --fakeroot image_r.sif image_r.def
+          apptainer build --fakeroot image_quarto.sif image_quarto.def
 
       - name: Upload .sif in an artifact
         uses: actions/upload-artifact@v3

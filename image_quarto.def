@@ -1,0 +1,31 @@
+Bootstrap: docker
+From: mambaorg/micromamba:1.4.6-jammy
+
+%help
+    Container with micromamba on Linux.
+
+%files
+    environment.yml /environment.yml
+
+%post
+    eval "$(micromamba shell hook -s posix)"
+    micromamba activate base
+
+    micromamba create -y -f /environment.yml -n myenv
+
+
+    echo 'eval "$(micromamba shell hook -s posix)"' >> /etc/profile
+    echo 'micromamba activate myenv' >> /etc/profile
+
+    apt-get update && apt-get install -y wget tar gdb file git
+%environment
+    eval "$(micromamba shell hook -s posix)"
+    micromamba activate myenv
+%runscript
+    python
+    exec "$@"
+
+
+
+
+
