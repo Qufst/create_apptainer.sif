@@ -28,6 +28,7 @@ From: mambaorg/micromamba:1.4.6-jammy
         git \
         gcc \
         g++ \
+        gzip \
         libcurl4-openssl-dev \
         libssl-dev \
         libxml2-dev \
@@ -37,6 +38,7 @@ From: mambaorg/micromamba:1.4.6-jammy
         libpng-dev \
         zlib1g-dev \
         python3-pip \
+        tar \
         wget
 %environment
     eval "$(micromamba shell hook -s posix)"
