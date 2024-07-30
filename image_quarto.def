@@ -17,7 +17,27 @@ From: mambaorg/micromamba:1.4.6-jammy
     echo 'eval "$(micromamba shell hook -s posix)"' >> /etc/profile
     echo 'micromamba activate myenv' >> /etc/profile
 
-    apt-get update && apt-get install -y wget tar ca-certificates gdb file git
+    apt-get update && apt-get install -y \
+        software-properties-common \
+        dirmngr \
+        gnupg \
+        apt-transport-https \
+        ca-certificates \
+        curl \
+        make \
+        git \
+        gcc \
+        g++ \
+        libcurl4-openssl-dev \
+        libssl-dev \
+        libxml2-dev \
+        libfontconfig1-dev \
+        libfreetype6-dev \
+        libtiff5-dev \
+        libpng-dev \
+        zlib1g-dev \
+        python3-pip \
+        wget
 %environment
     eval "$(micromamba shell hook -s posix)"
     micromamba activate myenv
