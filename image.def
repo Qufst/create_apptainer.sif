@@ -17,7 +17,7 @@ From: mambaorg/micromamba:1.4.6-jammy
     echo 'eval "$(micromamba shell hook -s posix)"' >> /etc/profile
     echo 'micromamba activate myenv' >> /etc/profile
 
-    apt-get update && apt-get install -y wget tar gdb file git
+    apt-get update && apt-get install -y wget tar ca-certificates gdb file git
     
     QUARTO_VERSION=1.5.54
     mkdir -p /opt/quarto
