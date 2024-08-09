@@ -30,6 +30,10 @@ jobs:
       #    name: apptainer-image
       #    path: image.sif
 
+      - name: clone repository
+        run: |
+          git clone git@github.com:DiamondLightSource/zenodo-uploader.git
+
       - name: publish on zenodo
         env:
           ZENODO_TOKEN: ${{ secrets.ZENODO }}
