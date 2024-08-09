@@ -43,10 +43,18 @@ jobs:
             -H "Authorization: Bearer $ZENODO_TOKEN" \
             -F file=@image.sif
 
-          # Publish the updated record
-          echo "Publishing updated Zenodo record..."
-          curl -s -X POST "https://zenodo.org/api/deposit/depositions/$DEPOSITION_ID/actions/publish" \
-            -H "Authorization: Bearer $ZENODO_TOKEN"
 
+      - name: Publish updated Zenodo record
+        env:
+          ZENODO_TOKEN: ${{ secrets.ZENODO }}
+        run: |
+          DEPOSITION_ID=13271931
+          echo "Publishing updated Zenodo record..."
+          RESPONSE=$(curl -s -o response.json -w "%{http_code}" -X POST "https://zenodo.org/api/deposit/depositions/$DEPOSITION_ID/actions/publish" \
+            -H "Authorization: Bearer $ZENODO_TOKEN")
+          if [ "$RESPONSE" -ne 202 ]; then
+            echo "Error publishing record: $(cat response.json)"
+            exit 1
+          fi
           echo "Zenodo record updated and published successfully."
 
