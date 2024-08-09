@@ -21,8 +21,9 @@ else:
     exit(1)
 
 # Extraire l'ID de la déposition et l'URL du bucket
-deposition_id = response.json()['id']
-bucket_url = response.json()["links"]["bucket"]
+response_json = response.json()
+deposition_id = response_json['id']  # Correctement extraire l'ID de la déposition
+bucket_url = response_json["links"]["bucket"]
 
 # Télécharger le fichier sur la déposition créée
 path = "./image.sif"
@@ -30,12 +31,12 @@ filename = "image.sif"
 
 with open(path, "rb") as file:
     upload_response = requests.put(
-        "%s/%s" % (bucket_url, filename),
+        f"{bucket_url}/{filename}",
         data=file,
         params=params,
     )
 
-if upload_response.status_code == 200:
+if upload_response.status_code in [200, 201]:
     print("File uploaded successfully")
 else:
     print(f"Failed to upload file: {upload_response.status_code}")
@@ -54,7 +55,7 @@ metadata = {
 }
 
 metadata_response = requests.put(
-    'https://zenodo.org/api/deposit/depositions/%s' % deposition_id,
+    f'https://zenodo.org/api/deposit/depositions/{deposition_id}',
     params=params,
     data=json.dumps(metadata),
     headers=headers
@@ -69,7 +70,7 @@ else:
 
 # Publier la déposition
 publish_response = requests.post(
-    'https://zenodo.org/api/deposit/depositions/%s/actions/publish' % deposition_id,
+    f'https://zenodo.org/api/deposit/depositions/{deposition_id}/actions/publish',
     params=params
 )
 
