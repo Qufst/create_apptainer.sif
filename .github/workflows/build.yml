@@ -29,5 +29,24 @@ jobs:
         with:
           name: apptainer-image
           path: image.sif
-        
+
+      - name: Publish image to Zenodo
+        env:
+          ZENODO_TOKEN: ${{ secrets.ZENODO }}
+        run: |
+          # Define the deposition ID
+          DEPOSITION_ID=13271931
+
+          # Upload the new file to the existing record
+          echo "Uploading image to existing Zenodo record..."
+          curl -s -X POST "https://zenodo.org/api/deposit/depositions/$DEPOSITION_ID/files" \
+            -H "Authorization: Bearer $ZENODO_TOKEN" \
+            -F file=@image.sif
+
+          # Publish the updated record
+          echo "Publishing updated Zenodo record..."
+          curl -s -X POST "https://zenodo.org/api/deposit/depositions/$DEPOSITION_ID/actions/publish" \
+            -H "Authorization: Bearer $ZENODO_TOKEN"
+
+          echo "Zenodo record updated and published successfully."
 
