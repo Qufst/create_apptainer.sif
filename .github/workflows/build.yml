@@ -43,6 +43,9 @@ jobs:
           -C "Festor Quentin" \
           -A "Université de Montpellier" \  
           -D "Etude du stockage d'environnements apptainer créés sur github pour la reproductibilité scientifique en statistiques." \
+          -K "Apptainer" \
+          -K "Scientific reproducibility" \
+          -K "Statistics" \
           -x \
           image.sif
 
