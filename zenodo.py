@@ -2,6 +2,7 @@ import requests
 import json
 
 # Remplacez par votre token d'accès Zenodo
+ZENODO_TOKEN = os.getenv('ZENODO_TOKEN')
 headers = {"Content-Type": "application/json"}
 params = {'access_token': ZENODO_TOKEN}
 
@@ -19,7 +20,7 @@ else:
     exit(1)
 
 # Extraire l'ID de la déposition et l'URL du bucket
-deposition_id = response.json()['13271931']
+deposition_id = response.json()['id']
 bucket_url = response.json()["links"]["bucket"]
 
 # Télécharger le fichier sur la déposition créée
