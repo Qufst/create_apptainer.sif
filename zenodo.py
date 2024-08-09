@@ -1,5 +1,6 @@
 import requests
 import json
+import os
 
 # Remplacez par votre token d'accès Zenodo
 ZENODO_TOKEN = os.getenv('ZENODO_TOKEN')
