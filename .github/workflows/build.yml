@@ -30,31 +30,19 @@ jobs:
       #    name: apptainer-image
       #    path: image.sif
 
-      - name: Publish image to Zenodo
+      - name: publish on zenodo
         env:
           ZENODO_TOKEN: ${{ secrets.ZENODO }}
         run: |
-          # Define the deposition ID
-          DEPOSITION_ID=13271931
+          # Install 'requests' module for python
+          pip install requests
 
-          # Upload the new file to the existing record
-          echo "Uploading image to existing Zenodo record..."
-          curl -s -X POST "https://zenodo.org/api/deposit/depositions/$DEPOSITION_ID/files" \
-            -H "Authorization: Bearer $ZENODO_TOKEN" \
-            -F file=@image.sif
+          python zenodo_uploader.py \
+          -z 13271931 \
+          -T "Stockage for apptainer's pictures" \
+          -C "Festor Quentin" \
+          -D "Etude du stockage d'environnements apptainer créés sur github pour la reproductibilité scientifique en statistiques." \
+          -x \
+          image.sif
 
-
-      - name: Publish updated Zenodo record
-        env:
-          ZENODO_TOKEN: ${{ secrets.ZENODO }}
-        run: |
-          DEPOSITION_ID=13271931
-          echo "Publishing updated Zenodo record..."
-          RESPONSE=$(curl -s -o response.json -w "%{http_code}" -X POST "https://zenodo.org/api/deposit/depositions/$DEPOSITION_ID/actions/publish" \
-            -H "Authorization: Bearer $ZENODO_TOKEN")
-          if [ "$RESPONSE" -ne 202 ]; then
-            echo "Error publishing record: $(cat response.json)"
-            exit 1
-          fi
-          echo "Zenodo record updated and published successfully."
 
