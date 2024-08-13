@@ -39,7 +39,7 @@ jobs:
           -T "Stockage for apptainer's pictures" \
           -C "Festor Quentin" \
           -A "Université de Montpellier" \  
-          -K "['Apptainer', 'Containerization', 'Reproducibility', 'Statistics', 'GitHub']" \
+          -K '["Apptainer", "Containerization", "Reproducibility", "Statistics", "GitHub"]' \
           -D "Etude du stockage d'environnements apptainer créés sur github pour la reproductibilité scientifique en statistiques." \
           -x \
           image.sif 
