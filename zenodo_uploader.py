@@ -248,6 +248,8 @@ def uploader():
         args.title, args.description, args.creator, args.affiliation, args.keyword
     )
 
+    print("Metadata:", metadata) #
+    validate_metadata(metadata) #
     metadata.update(cl_metadata)
     validate_metadata(metadata)
 
