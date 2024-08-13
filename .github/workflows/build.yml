@@ -34,19 +34,21 @@ jobs:
         env:
           ZENODO_TOKEN: ${{ secrets.ZENODO }}
         run: |
-          # Install 'requests' module for python
-          pip install requests
-          python zenodo.py
+          python zenodo_uploader.py \
+          -z 13271931 \
+          -T "Stockage for apptainer's pictures" \
+          -C "Festor Quentin" \
+          -A "Université de Montpellier" \  
+          -K "Software"
+          -D "Etude du stockage d'environnements apptainer créés sur github pour la reproductibilité scientifique en statistiques." \
+          -x \
+          image.sif 
 
-
-#python zenodo_uploader.py \
-#-z 13271931 \
-#-T "Stockage for apptainer's pictures" \
-#-C "Festor Quentin" \
-#-A "Université de Montpellier" \  
-#-K "Other"
-#-D "Etude du stockage d'environnements apptainer créés sur github pour la reproductibilité scientifique en statistiques." \
-#-x \
-#image.sif
+      #    # Install 'requests' module for python
+      #    pip install requests
+      #    pip install --upgrade requests urllib3
+      #    which import
+      #    python -c "import logging; logging.basicConfig(level=logging.DEBUG);"
+      #    python zenodo.py
 
 
