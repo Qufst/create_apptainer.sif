@@ -1,9 +1,10 @@
 #!/bin/bash
 
 # Variables
-ACCESS_TOKEN=$ZENODO_TOKEN  # Variable d'environnement pour le token
+ACCESS_TOKEN=$ZENODO_TOKEN
 DEPOSITION_ID="13271931"
 IMAGE_PATH="image.sif"
+PUBLICATION_DATE=$(date -I)  # La date de publication au format ISO (YYYY-MM-DD)
 
 # Créer une nouvelle version
 NEW_VERSION_RESPONSE=$(curl -s -X POST "https://zenodo.org/api/deposit/depositions/${DEPOSITION_ID}/actions/newversion?access_token=${ACCESS_TOKEN}")
@@ -18,8 +19,38 @@ fi
 NEW_VERSION=$(echo $NEW_VERSION_RESPONSE | jq -r '.links.latest_draft')
 NEW_DEPOSITION_ID=$(basename ${NEW_VERSION})
 
+# Ajouter les métadonnées nécessaires (y compris la date de publication)
+UPDATE_METADATA_RESPONSE=$(curl -s -X PUT \
+  -H "Content-Type: application/json" \
+  -H "Authorization: Bearer $ACCESS_TOKEN" \
+  --data-binary @- \
+  "${NEW_VERSION}?access_token=${ACCESS_TOKEN}" <<EOF
+{
+  "metadata": {
+    "title": "Nouvelle version avec image Apptainer",
+    "upload_type": "software",
+    "description": "AutoPublication de l'environnement apptainer depuis github ",
+    "publication_date": "$PUBLICATION_DATE",
+    "version": "v3",
+    "creators": [
+      {
+        "name": "Festor Quentin",
+        "affiliation": "Université de Montpellier"
+      }
+    ]
+  }
+}
+EOF
+)
+
+# Vérifier si la mise à jour des métadonnées a réussi
+if [ $? -ne 0 ]; then
+  echo "Échec de la mise à jour des métadonnées."
+  exit 1
+fi
+
 # Télécharger l'image Apptainer vers le dépôt
-UPLOAD_RESPONSE=$(curl --progress-bar -o /dev/null -i -X POST \
+UPLOAD_RESPONSE=$(curl --silent -o /dev/null -i -X POST \
   -F "file=@${IMAGE_PATH}" \
   "${NEW_VERSION}/files?access_token=${ACCESS_TOKEN}")
 
