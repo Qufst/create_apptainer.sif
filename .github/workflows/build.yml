@@ -34,8 +34,8 @@ jobs:
         env:
           ZENODO_TOKEN: ${{ secrets.ZENODO }}
         run: |
-          chmod +x zenodo
-          zenodo
+          chmod +x zenodo.sh
+          ./zenodo.sh
       #python zenodo_uploader.py -z 13271931 -m metadata.json -x image.sif
 
 
