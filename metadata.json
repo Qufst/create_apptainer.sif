@@ -1,7 +1,0 @@
-{
-    "title": "Stockage for apptainer's pictures",
-    "description": "Etude du stockage d'environnements apptainer créés sur github pour la reproductibilité scientifique en statistiques.",
-    "creators": [{"name": "Festor Quentin", "affiliation": "Université de Montpellier"}],
-    "keywords": ["Apptainer", "Containerization", "Reproducibility", "Statistics", "GitHub"]
-  }
-  
