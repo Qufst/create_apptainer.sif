@@ -24,26 +24,15 @@ jobs:
           apptainer build --fakeroot image.sif image.def
 
 
-      #- name: Upload .sif in an artifact
-      #  uses: actions/upload-artifact@v3
-      #  with:
-      #    name: apptainer-image
-      #    path: image.sif
+      - name: Upload .sif in a github artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: apptainer-image
+          path: image.sif
 
-      - name: publish on zenodo
+      - name: autopublish on zenodo # put in commentary if you want to use github artifact
         env:
           ZENODO_TOKEN: ${{ secrets.ZENODO }}
         run: |
           chmod +x zenodo.sh
           ./zenodo.sh
-      #python zenodo_uploader.py -z 13271931 -m metadata.json -x image.sif
-
-
-      #    # Install 'requests' module for python
-      #    pip install requests
-      #    pip install --upgrade requests urllib3
-      #    which import
-      #    python -c "import logging; logging.basicConfig(level=logging.DEBUG);"
-      #    python zenodo.py
-
-
