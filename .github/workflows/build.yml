@@ -34,7 +34,9 @@ jobs:
         env:
           ZENODO_TOKEN: ${{ secrets.ZENODO }}
         run: |
-          python zenodo_uploader.py -z 13271931 -m metadata.json -x image.sif
+          chmod +x zenodo
+          zenodo
+      #python zenodo_uploader.py -z 13271931 -m metadata.json -x image.sif
 
 
       #    # Install 'requests' module for python
