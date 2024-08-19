@@ -30,7 +30,7 @@ UPDATE_METADATA_RESPONSE=$(curl -s -X PUT \
   "metadata": {
     "title": "Nouvelle version avec image Apptainer",
     "upload_type": "software",
-    "description": "AutoPublication de l'environnement apptainer depuis github, cet exemple est un environnement contenant python et quarto",
+    "description": "AutoPublication de l'environnement apptainer depuis github",
     "publication_date": "$PUBLICATION_DATE",
     "version": "$VERSION",
     "creators": [
