@@ -24,11 +24,11 @@ jobs:
           apptainer build --fakeroot image.sif image.def
 
 
-      - name: Upload .sif in a github artifact
-        uses: actions/upload-artifact@v3
-        with:
-          name: apptainer-image
-          path: image.sif
+      #- name: Upload .sif in a github artifact
+      #  uses: actions/upload-artifact@v3
+      #  with:
+      #    name: apptainer-image
+      #    path: image.sif
 
       - name: autopublish on zenodo # put in commentary if you want to use github artifact
         env:
