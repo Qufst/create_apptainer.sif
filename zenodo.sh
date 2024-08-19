@@ -4,7 +4,7 @@
 ACCESS_TOKEN=$ZENODO_TOKEN # token zenodo
 DEPOSITION_ID="13271931" # id du dépôt zenodo
 IMAGE_PATH="image.sif" # nom de l'image à publier
-PUBLICATION_DATE=$(date -I)  # La date de publication au format ISO (YYYY-MM-DD)
+PUBLICATION_DATE="2024-08-19"  # La date de publication au format ISO (YYYY-MM-DD)
 VERSION="v3" # Version à modifier pour faire +1 par rapport à ce qui éxiste
 
 # Créer une nouvelle version
