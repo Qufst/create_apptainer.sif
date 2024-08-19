@@ -5,7 +5,7 @@ ACCESS_TOKEN=$ZENODO_TOKEN # token zenodo
 DEPOSITION_ID="13271931" # id du dépôt zenodo
 IMAGE_PATH="image.sif" # nom de l'image à publier
 PUBLICATION_DATE=$(date -I)  # La date de publication au format ISO (YYYY-MM-DD)
-VERSION="v3" # Version à modifier pour faire +1 par rapport à ce qui éxiste
+VERSION="image1" # Version à modifier pour faire +1 par rapport à ce qui éxiste
 
 # Créer une nouvelle version
 NEW_VERSION_RESPONSE=$(curl -s -X POST "https://zenodo.org/api/deposit/depositions/${DEPOSITION_ID}/actions/newversion?access_token=${ACCESS_TOKEN}")
@@ -35,7 +35,7 @@ UPDATE_METADATA_RESPONSE=$(curl -s -X PUT \
     "version": "$VERSION",
     "creators": [
       {
-        "name": "Festor Quentin",
+        "name": "Festor Quentin"
         "affiliation": "Université de Montpellier"
       }
     ]
@@ -63,7 +63,7 @@ fi
 
 # Publier la nouvelle version
 PUBLISH_RESPONSE=$(curl -s -X POST "${NEW_VERSION}/actions/publish?access_token=${ACCESS_TOKEN}")
-
+ 
 # Vérifier si la publication a réussi
 if [ $? -ne 0 ]; then
   echo "Échec de la publication de la nouvelle version."
