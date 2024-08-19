@@ -5,7 +5,7 @@ ACCESS_TOKEN=$ZENODO_TOKEN # token zenodo
 DEPOSITION_ID="13271931" # id du dépôt zenodo
 IMAGE_PATH="image.sif" # nom de l'image à publier
 PUBLICATION_DATE="2024-08-19"  # La date de publication au format ISO (YYYY-MM-DD)
-VERSION="v3" # Version à modifier pour faire +1 par rapport à ce qui éxiste
+VERSION="v8" # Version à modifier pour faire +1 par rapport à ce qui éxiste
 
 # Créer une nouvelle version
 NEW_VERSION_RESPONSE=$(curl -s -X POST "https://zenodo.org/api/deposit/depositions/${DEPOSITION_ID}/actions/newversion?access_token=${ACCESS_TOKEN}")
@@ -30,7 +30,7 @@ UPDATE_METADATA_RESPONSE=$(curl -s -X PUT \
   "metadata": {
     "title": "Nouvelle version avec image Apptainer",
     "upload_type": "software",
-    "description": "AutoPublication de l'environnement apptainer depuis github",
+    "description": "AutoPublication de l'environnement apptainer depuis github ",
     "publication_date": "$PUBLICATION_DATE",
     "version": "$VERSION",
     "creators": [
