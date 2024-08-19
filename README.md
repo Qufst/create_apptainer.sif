@@ -16,4 +16,4 @@ Github artifact utilisation:
 We also want to push apptainer environments on Zenodo, so we have the second method:
 
 - in the workflows, comment out the artifact publication part.
-- in the zenodo.sh script, change the version and release date to match expectations, otherwise the release will fail
+- in the zenodo.sh script, change the version and release date to match expectations, otherwise the release will fail. Don't forget to descrive the environment in the description, put the version of what you use. 
