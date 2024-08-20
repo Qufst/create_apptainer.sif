@@ -1,10 +1,12 @@
 #!/bin/bash
 
-# Variables
+# Variables à modifier si vous copiez le projet
 ACCESS_TOKEN=$ZENODO_TOKEN # token zenodo
 DEPOSITION_ID="13271931" # id du dépôt zenodo
 IMAGE_PATH="image.sif" # nom de l'image à publier
 PUBLICATION_DATE=$(date -I)  # La date de publication au format ISO (YYYY-MM-DD)
+VERSION="v3" # Version à modifier pour faire +1 par rapport à ce qui existe
+DESCRIPTION="Cette nouvelle version de l'environnement Apptainer contient une mise à jour importante, incluant les dernières modifications du code et une image container optimisée. La version a été générée automatiquement depuis GitHub, garantissant ainsi une intégration continue et une mise à jour rapide. Ce dépôt est destiné à faciliter le déploiement et l'utilisation de l'environnement Apptainer pour les utilisateurs finaux. L'objectif est de fournir un environnement reproductible et stable pour des expériences scientifiques à grande échelle."
 
 # Créer une nouvelle version
 NEW_VERSION_RESPONSE=$(curl -s -X POST "https://zenodo.org/api/deposit/depositions/${DEPOSITION_ID}/actions/newversion?access_token=${ACCESS_TOKEN}")
@@ -29,9 +31,9 @@ UPDATE_METADATA_RESPONSE=$(curl -s -X PUT \
   "metadata": {
     "title": "Nouvelle version avec image Apptainer",
     "upload_type": "software",
-    "description": "Cette nouvelle version de l'environnement Apptainer contient une mise à jour importante, incluant les dernières modifications du code et une image container optimisée. La version a été générée automatiquement depuis GitHub, garantissant ainsi une intégration continue et une mise à jour rapide. Ce dépôt est destiné à faciliter le déploiement et l'utilisation de l'environnement Apptainer pour les utilisateurs finaux. L'objectif est de fournir un environnement reproductible et stable pour des expériences scientifiques à grande échelle.",
+    "description": "$DESCRIPTION",
     "publication_date": "$PUBLICATION_DATE",
-    "version": "v3",
+    "version": "$VERSION",
     "creators": [
       {
         "name": "Festor Quentin",
